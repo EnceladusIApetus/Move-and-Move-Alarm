@@ -1,4 +1,4 @@
-package com.fatel.movealarm_v01;
+package com.ce_ooad.movealarm;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,20 +7,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class Intro_Activity extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.glossy_apple);
-        setContentView(R.layout.intro_layout);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        setContentView(R.layout.activity_intro);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_intro_, menu);
+        getMenuInflater().inflate(R.menu.menu_intro, menu);
         return true;
     }
 
@@ -41,13 +46,13 @@ public class Intro_Activity extends AppCompatActivity {
 
     public void linkLogin(View view)
     {
-        Intent intent = new Intent(this,Login_Activity.class);
+        Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
 
     public void linkCreate(View view)
     {
-        Intent intent = new Intent(this,Create_Account_Activity.class);
+        Intent intent = new Intent(this,createAccountActivity.class);
         startActivity(intent);
     }
 }

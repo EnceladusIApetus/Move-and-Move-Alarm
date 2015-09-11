@@ -1,4 +1,4 @@
-package com.fatel.movealarm_v01;
+package com.ce_ooad.movealarm;
 
 /**
  * Created by FatelCypher on 9/10/2015.
