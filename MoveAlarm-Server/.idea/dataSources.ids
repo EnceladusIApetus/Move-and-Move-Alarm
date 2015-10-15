@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MariaDB - MoveAlarm@203.151.92.198" uuid="f9b4c916-098c-4195-96d7-e0d2b06ead8c">
+    <database-info product="MySQL" version="5.5.44-MariaDB" jdbc-version="4.0" driver-name="MariaDB connector/J" driver-version="1.2.3">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="MoveAlarm"/>
+    <table name="test" schema="" catalog="MoveAlarm" type="BASE TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key columns="id"/>
+      <index name="PRIMARY" unique="true" columns="id"/>
+    </table>
+    <table name="testTable" schema="" catalog="MoveAlarm" type="BASE TABLE">
+      <column name="var2" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key columns="id"/>
+      <index name="PRIMARY" unique="true" columns="id"/>
+    </table>
+  </data-source>
+</component>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MariaDB - MoveAlarm@203.151.92.198" uuid="f9b4c916-098c-4195-96d7-e0d2b06ead8c">
+      <secret-storage>memory</secret-storage>
+      <user-name>oat</user-name>
+      <schema-pattern>MoveAlarm.*</schema-pattern>
+      <default-schemas>MoveAlarm.*</default-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,16 +1,11 @@
 package movealarm.kmitl.net;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SQLInquirer {
 
-    private String sqlCommand;
     private Connection connector;
     private Statement stmt;
     private ResultSet rs;
@@ -21,22 +16,6 @@ public class SQLInquirer {
     {
         connectionStatus = startConnection();
         collection = new ArrayList<HashMap<String, Object>>();
-    }
-
-    public boolean startQuery()
-    {
-        try {
-            stmt = connector.createStatement();
-            rs = stmt.executeQuery(sqlCommand);
-        } catch (SQLException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public void setCommand(String sqlCommand)
-    {
-        this.sqlCommand = sqlCommand;
     }
 
     public boolean startConnection()
@@ -74,6 +53,29 @@ public class SQLInquirer {
         }
     }
 
+    public HashMap<String,Object> find(int id,String table)
+    {
+        HashMap<String,Object> data = new HashMap<>();
+        try {
+            stmt = connector.createStatement();
+            String sql = "SELECT * FROM " + table;
+            rs = stmt.executeQuery(sql);
+            ResultSetMetaData rs_m = rs.getMetaData();
+            while(rs != null) {
+                rs.next();
+                if(rs.getInt("id") == id) {
+                    for(int col = 1;col <= rs_m.getColumnCount();col++) {
+                        data.put(rs_m.getColumnName(col),rs.getObject(col));
+                    }
+                    break;
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
     public ArrayList<HashMap<String, Object>> getCollection()
     {
         return collection;
