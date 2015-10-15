@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -33,10 +34,18 @@ public class ConnectionTesting {
     }
 
     @RequestMapping("/find")
-    public String testFind(@RequestParam(value="id") int id,@RequestParam(value = "table") String table) {
+    public String testFind(@RequestParam(value="id") int id,@RequestParam(value = "table") String table) throws SQLException {
         SQLInquirer sql = new SQLInquirer();
         sql.startConnection();
         HashMap<String,Object> data = sql.find(id,table);
         return data.toString();
+    }
+
+    @RequestMapping("/save")
+    public String testSave(@RequestParam(value = "json")String json,@RequestParam(value = "table")String table) throws SQLException {
+        SQLInquirer sql = new SQLInquirer();
+        sql.startConnection();
+        sql.save(json,table);
+        return "save complete!";
     }
 }

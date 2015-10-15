@@ -53,29 +53,40 @@ public class SQLInquirer {
         }
     }
 
-    public HashMap<String,Object> find(int id,String table)
-    {
+    public HashMap<String,Object> find(int id,String table) throws SQLException {
         HashMap<String,Object> data = new HashMap<>();
-        try {
-            stmt = connector.createStatement();
-            String sql = "SELECT * FROM " + table;
-            rs = stmt.executeQuery(sql);
-            ResultSetMetaData rs_m = rs.getMetaData();
-            while(rs != null) {
-                rs.next();
-                if(rs.getInt("id") == id) {
-                    for(int col = 1;col <= rs_m.getColumnCount();col++) {
-                        data.put(rs_m.getColumnName(col),rs.getObject(col));
-                    }
-                    break;
+        stmt = connector.createStatement();
+        String sql = "SELECT * FROM " + table;
+        rs = stmt.executeQuery(sql);
+        ResultSetMetaData rs_m = rs.getMetaData();
+        while(rs != null) {
+            rs.next();
+            if(rs.getInt("id") == id) {
+                for(int col = 1;col <= rs_m.getColumnCount();col++) {
+                    data.put(rs_m.getColumnName(col),rs.getObject(col));
                 }
+                break;
             }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
         }
         return data;
     }
+
+   /* public void save(Object json, String table) throws SQLException {
+        HashMap<String, String> map = new HashMap<String, String>();
+        JSONObject jObject = new JSONObject(t);
+        Iterator<?> keys = jObject.keys();
+
+        while( keys.hasNext() ){
+            String key = (String)keys.next();
+            String value = jObject.getString(key);
+            map.put(key, value);
+
+        }
+        stmt = connector.createStatement();
+        String sql = "INSERT INTO " + table + " (" + column + ") " + "VALUES " + "(" + values + ") ";
+        stmt.execute(sql);
+    }*/
+
     public ArrayList<HashMap<String, Object>> getCollection()
     {
         return collection;
