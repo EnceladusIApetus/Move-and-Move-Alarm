@@ -1,16 +1,11 @@
 package movealarm.kmitl.net;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SQLInquirer {
 
-    private String sqlCommand;
     private Connection connector;
     private Statement stmt;
     private ResultSet rs;
@@ -23,20 +18,42 @@ public class SQLInquirer {
         collection = new ArrayList<HashMap<String, Object>>();
     }
 
-    public boolean startQuery()
-    {
-        try {
-            stmt = connector.createStatement();
-            rs = stmt.executeQuery(sqlCommand);
-        } catch (SQLException e) {
-            return false;
+    public ArrayList<HashMap<String, Object>> where(String tableName, String colName, String operator, String value) throws SQLException {
+        rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + colName + " " + operator + " '" + value + "'");
+        ResultSetMetaData metaData = rs.getMetaData();
+        while(rs.next()) {
+            HashMap<String, Object> temp = new HashMap<String, Object>();
+            for(int i = 1; i <= metaData.getColumnCount(); i++)
+                temp.put(metaData.getColumnName(i), rs.getObject(i));
+            collection.add(temp);
         }
-        return true;
+        return collection;
     }
 
-    public void setCommand(String sqlCommand)
-    {
-        this.sqlCommand = sqlCommand;
+    public ArrayList<HashMap<String, Object>> where(String sqlCommand) throws SQLException {
+        rs = stmt.executeQuery(sqlCommand);
+        ResultSetMetaData metaData = rs.getMetaData();
+        while(rs.next()) {
+            HashMap<String, Object> temp = new HashMap<String, Object>();
+            for(int i = 1; i <= metaData.getColumnCount(); i++)
+                temp.put(metaData.getColumnName(i), rs.getObject(i));
+            collection.add(temp);
+        }
+        return collection;
+    }
+
+    public String testQuery()  {
+        String word = "test";
+        try {
+            if(isConnecting()) {
+                rs = stmt.executeQuery("SELECT * FROM testTable");
+                rs.next();
+                word = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return word;
     }
 
     public boolean startConnection()
@@ -44,8 +61,9 @@ public class SQLInquirer {
         try{
             Class.forName("org.mariadb.jdbc.Driver");
             connector =  DriverManager.getConnection("jdbc:mariadb://203.151.92.198/MoveAlarm" +
-                    "?user=ice&password=7571179");
+                    "?user=oat&password=123454322");
             if(connector != null){
+                stmt = connector.createStatement();
                 return true;
             } else {
                 return false;
