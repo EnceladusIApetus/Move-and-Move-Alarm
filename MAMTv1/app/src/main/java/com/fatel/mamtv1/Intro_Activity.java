@@ -1,11 +1,24 @@
 package com.fatel.mamtv1;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Intro_Activity extends AppCompatActivity {
 
@@ -13,6 +26,7 @@ public class Intro_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_layout);
+       
     }
 
     @Override
@@ -48,4 +62,5 @@ public class Intro_Activity extends AppCompatActivity {
         Intent intent = new Intent(this,Create_Account_Activity.class);
         startActivity(intent);
     }
+
 }
