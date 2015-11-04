@@ -44,14 +44,18 @@ public class SQLInquirer {
         orderBy = "";
     }
 
+    public void addBatch(String batchCommand) throws SQLException {
+        stmt.addBatch(batchCommand);
+    }
+
     public boolean isOrderBy()
     {
         return (orderBy.equals("ORDER BY ")) ? false : true;
     }
 
-    public ArrayList<HashMap<String, Object>> all(String tableName) throws SQLException {
+    public ArrayList<HashMap<String, Object>> query(String sqlCommand) throws SQLException {
         ArrayList<HashMap<String, Object>> collection = new ArrayList<>();
-        rs = stmt.executeQuery("SELECT * FROM " + tableName);
+        rs = stmt.executeQuery(sqlCommand);
         ResultSetMetaData metaData = rs.getMetaData();
         while(rs.next()) {
             HashMap<String, Object> temp = new HashMap<>();
@@ -62,18 +66,15 @@ public class SQLInquirer {
         return collection;
     }
 
+    public ArrayList<HashMap<String, Object>> all(String tableName) throws SQLException {
+        String sqlCommand = "SELECT * FROM " + tableName;
+        return query(sqlCommand);
+    }
+
     public ArrayList<HashMap<String, Object>> where(String sqlCommand) throws SQLException {
-        ArrayList<HashMap<String, Object>> collection = new ArrayList<>();
         if(isOrderBy())
             sqlCommand += " " + orderBy + " " + orderType;
-        rs = stmt.executeQuery(sqlCommand);
-        ResultSetMetaData metaData = rs.getMetaData();
-        while(rs.next()) {
-            HashMap<String, Object> temp = new HashMap<>();
-            for(int i = 1; i <= metaData.getColumnCount(); i++)
-                temp.put(metaData.getColumnName(i), rs.getObject(i));
-            collection.add(temp);
-        }
+        ArrayList<HashMap<String, Object>> collection = query(sqlCommand);
         resetOrderBy();
         return collection;
     }
@@ -84,7 +85,7 @@ public class SQLInquirer {
     }
 
     public ArrayList<HashMap<String, Object>> where(String tableName, String colName, String operator, String value) throws SQLException {
-        String sqlCommand = "SELECT * FROM " + tableName + " WHERE " + colName + " " + operator + " " + value;
+        String sqlCommand = "SELECT * FROM " + tableName + " WHERE " + colName + " " + operator + " '" + value + "'";
         return where(sqlCommand);
     }
 
@@ -123,7 +124,7 @@ public class SQLInquirer {
         try{
             Class.forName("org.mariadb.jdbc.Driver");
             connector =  DriverManager.getConnection("jdbc:mariadb://203.151.92.198/MoveAlarm" +
-                    "?user=oat&password=123454322");
+                    "?user=oat&password=123454322&charset=utf-8");
             if(connector != null){
                 stmt = connector.createStatement();
                 return true;
