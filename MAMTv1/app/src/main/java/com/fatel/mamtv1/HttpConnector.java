@@ -8,16 +8,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.net.NetworkInterface;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -26,70 +31,117 @@ import java.util.Objects;
  */
 public class HttpConnector{
 
-    private RequestQueue requestQueue;
-    private static Context ctx;
-    private boolean isDownloadedComplete;
-    private String data;
-    private String errorStatus;
+    private Context context;
+    /**
+     * Log or request TAG
+     */
+    public static final String TAG = "VolleyPatterns";
 
-    public HttpConnector(Context context) {
-        ctx = context;
-        requestQueue = getRequestQueue();
-        isDownloadedComplete = false;
-        data = new String("");
-        errorStatus = new String("");
+    /**
+     * Global request queue for Volley
+     */
+    private RequestQueue mRequestQueue;
+
+    /**
+     * A singleton instance of the application class for easy access in other places
+     */
+    private static HttpConnector sInstance;
+
+
+    /**
+     * @return ApplicationController singleton instance
+     */
+    public static synchronized HttpConnector getInstance() {
+        return sInstance;
     }
-
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(ctx.getApplicationContext());
+    public HttpConnector(Context context){
+        this.context = context;
+        sInstance = getInstance();
+        mRequestQueue = getRequestQueue(context);
+    }
+    /**
+     * @return The Volley Request queue, the queue will be created if it is null
+     */
+    public RequestQueue getRequestQueue(Context context) {
+        // lazy initialize the request queue, the queue instance will be
+        // created when it is accessed for the first time
+        if (mRequestQueue == null) {
+            mRequestQueue = Volley.newRequestQueue(context);
         }
-        return requestQueue;
+
+        return mRequestQueue;
     }
 
-    public void addToRequestQueue(Request req) {
-        getRequestQueue().add(req);
+    /**
+     * Adds the specified request to the global queue, if tag is specified
+     * then it is used else Default TAG is used.
+     *
+     * @param req
+     * @param tag
+     */
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        // set the default tag if tag is empty
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+
+        VolleyLog.d("Adding request to queue: %s", req.getUrl());
+
+        getRequestQueue(context).add(req);
     }
 
-    public boolean isDownloadedComplete()
-    {
-        return isDownloadedComplete;
+    /**
+     * Adds the specified request, to the global queue using the Default TAG.
+     *
+     * @param req
+     * @param tag
+     */
+    public <T> void addToRequestQueue(Request<T> req) {
+        // set the default tag if tag is empty
+        req.setTag(TAG);
+
+        getRequestQueue(context).add(req);
     }
 
-    public String getData()
-    {
-        return data;
+    /**
+     * Cancels all pending requests by the specified TAG, it is important
+     * to specify a TAG so that the pending/ongoing requests can be cancelled.
+     *
+     * @param tag
+     */
+    public void cancelPendingRequests(Object tag) {
+        if (mRequestQueue != null) {
+            mRequestQueue.cancelAll(tag);
+        }
     }
+    public void getrequest(){
 
-    public String getErrorStatus()
-    {
-        return errorStatus;
-    }
+// add the request object to the queue to be executed
 
-    public void getDataFromServer(String url,int method)
-    {
-        StringRequest stringRequest = new StringRequest(method, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        data = s;
-                        isDownloadedComplete = true;
-                        Intent intent = new Intent(ctx, MainActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("complete", s);
-                        intent.putExtras(bundle);
-                        ctx.sendBroadcast(intent);
-                    }
-                },new Response.ErrorListener() {
-                     @Override
-                     public void onErrorResponse(VolleyError volleyError) {
-                         errorStatus = volleyError.toString();
-                         isDownloadedComplete = false;
-                        /* Intent intent = new Intent(ctx, MainActivity.class);
-                         intent.putExtra("error", volleyError.toString());
-                         ctx.startActivity(intent);*/
-                    }
+        //HttpConnector.getInstance().addToRequestQueue(req);
+        final String URL = "http://203.151.92.196:8080/user/findByID?id=6";
+        StringRequest req = new StringRequest(Request.Method.GET,URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                Log.i("success", dateFormat.format(calendar.getTime()));
+                VolleyLog.v("Response:%n %s", response);
+                String firstName = "" + Converter.getInstance().JsonToHashMap(response).get("firstName");
+                Log.i("success",firstName);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                Log.i("error","error");
+            }
         });
-        addToRequestQueue(stringRequest);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Log.i("start",dateFormat.format(calendar.getTime()));
+        mRequestQueue.add(req);
     }
+
 }
+
