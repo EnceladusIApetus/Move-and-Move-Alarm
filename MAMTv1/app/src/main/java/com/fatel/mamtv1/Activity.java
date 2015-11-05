@@ -41,10 +41,11 @@ public class Activity extends AppCompatActivity {
         imgView=(ImageView) findViewById(R.id.img);
         random();
         context=this;
-        if(ImageCollection.size()==0){
-            ImageCollection.initial();
+        ImageCollection imageCollection = ImageCollection.getInstance();
+        if(imageCollection.size()==0){
+            imageCollection.initial();
         }
-        img = ImageCollection.getImageById(imageId);
+        img = imageCollection.getImageById(imageId);
 
         exerciseImg=(img.get(count)).getImage();
         exerciseDes=(img.get(count)).getDescription();

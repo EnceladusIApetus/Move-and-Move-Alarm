@@ -7,11 +7,21 @@ import java.util.ArrayList;
  */
 public class ImageCollection {
 
+    private static ImageCollection instance = null;
     private static ArrayList<Image> imageCollection=new ArrayList<>();
     private static int count=0;
     private ImageHelper helper;
+    private ImageCollection(){
 
-    public static void addImage(int image,String description){
+    }
+    public static ImageCollection getInstance(){
+        if(instance == null){
+            instance = new ImageCollection();
+        }
+        return instance;
+    }
+
+    public void addImage(int image,String description){
 
         Image img = new Image(count,image,description);
         imageCollection.add(img);
@@ -19,7 +29,7 @@ public class ImageCollection {
 
     }
 
-    public static void initial (){
+    public void initial (){
 
         addImage(R.drawable.ex1, "บริหารกล้ามเนื้อคอ");
         addImage(R.drawable.ex2,"ยืดกล้ามเนื้อแขน");
@@ -32,13 +42,13 @@ public class ImageCollection {
         addImage(R.drawable.ex9,"ยืดกล้ามเนื้อส่วนแขน");
 
     }
-    public static int size(){
+    public int size(){
         return imageCollection.size();
     }
-    public static Image getImageById(int id){
+    public Image getImageById(int id){
         return imageCollection.get(id);
     }
-    public static ArrayList<Image> getImageById(int[] id){
+    public ArrayList<Image> getImageById(int[] id){
         ArrayList<Image> imgcoll = new ArrayList<>();
         for (int i=0;i<id.length;i++){
             imgcoll.add(imageCollection.get(id[i]));
