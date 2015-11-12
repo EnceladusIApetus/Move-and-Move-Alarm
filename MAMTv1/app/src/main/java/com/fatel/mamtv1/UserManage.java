@@ -175,6 +175,6 @@ public class UserManage {
     public String getCurrentFacebookLastName(){
         return currentUser.getFacebookLastName();
     }
-
+public User getCurrentUser(){return currentUser;}
 
 }

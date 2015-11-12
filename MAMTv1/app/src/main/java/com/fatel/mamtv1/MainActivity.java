@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     UserManage.getInstance().mauser = 0;
                 }
                 else if(UserManage.getInstance().mauser == 2) {
+                    UserManage.getInstance().logoutUser();
                     LoginManager.getInstance().logOut();
                     UserManage.getInstance().mauser = 0;
                 }
