@@ -1,6 +1,5 @@
 package movealarm.kmitl.net;
 
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,9 +30,9 @@ public class User extends Model{
         this.tableName = "user"; //table name of user data in the database
         //this.addRequiredField("firstName"); //add required fields that must be filled before saving
         //this.addRequiredField("lastName");
-        this.addRequiredField("userName");
+        //this.addRequiredField("userName");
         //this.addRequiredField("email");
-        this.addRequiredField("password");
+        //this.addRequiredField("password");
         temp_scoreLogList = new ArrayList<>();
         temp_activityLogList = new ArrayList<>();
     }
