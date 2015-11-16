@@ -30,6 +30,7 @@ CircleImageView propic;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_p);
+        //load and set profile picture
         Glide.with(this).load("https://graph.facebook.com/" + UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId() + "/picture?type=large").into(propic);
         return view;
     }

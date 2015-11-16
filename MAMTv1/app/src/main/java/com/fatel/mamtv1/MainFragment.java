@@ -43,15 +43,11 @@ public class MainFragment extends android.support.v4.app.Fragment {
         setDay(view);
         mAlarmHelper = new DBAlarmHelper(getActivity());
         setTextAlarm(view,mAlarmHelper);
-        String id="";
-        if(getArguments()!=null) {
-            id = getArguments().getString("id");
-        }
-
         propic = (CircleImageView)view.findViewById(R.id.profile_image_f);
         Log.i("xx", propic.toString());
         propic.setVisibility(View.VISIBLE);
         Log.i("xx", "do?");
+        //load and set profile picture
         Glide.with(this).load("https://graph.facebook.com/" + UserManage.getInstance((Context)Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookId() + "/picture?type=large").into(propic);
         return view;
     }

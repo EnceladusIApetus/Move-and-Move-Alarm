@@ -42,12 +42,14 @@ public class Intro_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //onClick method for Login
     public void linkLogin(View view)
     {
         Intent intent = new Intent(this,Login_Activity.class);
         startActivity(intent);
     }
 
+    //onClick method for Create Account
     public void linkCreate(View view)
     {
         Intent intent = new Intent(this,Create_Account_Activity.class);

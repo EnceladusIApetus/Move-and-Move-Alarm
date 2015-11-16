@@ -17,9 +17,9 @@ public class ScoreboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scoreboard);
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        pager.setAdapter(adapter);//set adapter pager Scoreboaard(User,Group)
         indicator = (TabPageIndicator)findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
+        indicator.setViewPager(pager);//set Indicator (tab menu)
     }
 
     @Override

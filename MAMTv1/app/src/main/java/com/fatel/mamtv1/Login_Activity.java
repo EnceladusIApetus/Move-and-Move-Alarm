@@ -44,6 +44,7 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //facebook login initialize
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.fatel.mamtv1",
@@ -131,6 +132,7 @@ public class Login_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //onClick login with MoveAlarm id
     public void linkMain(View view)
     {
         EditText username;

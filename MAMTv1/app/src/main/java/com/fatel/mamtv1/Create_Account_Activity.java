@@ -42,6 +42,7 @@ public class Create_Account_Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //onClick method for Create Account with Move Alerm
     public void createAccountAndLinkMain(View view)
     {
         EditText username;

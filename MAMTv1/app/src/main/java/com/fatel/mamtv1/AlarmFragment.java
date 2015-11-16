@@ -57,13 +57,14 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_alarm, container, false);
 
         mAlarmHelper = new DBAlarmHelper(getActivity());
-Log.i("xx",mAlarmHelper.checkdata()+"");
-        mStartHr = createSpinner(12, R.id.start_hr,true,view,mAlarmHelper,true);
-        mStartMin = createSpinner(60, R.id.start_min,false,view,mAlarmHelper,true);
-        mFinishHr = createSpinner(12, R.id.fin_hr, true, view,mAlarmHelper,false);
-        mFinishMin = createSpinner(60, R.id.fin_min, false, view, mAlarmHelper, false);
-        mStartAP = createSpinnerAmPm(R.id.start_AP, view,mAlarmHelper,true);
-        mFinishAP = createSpinnerAmPm(R.id.fin_AP, view,mAlarmHelper,false);
+        Log.i("xx",mAlarmHelper.checkdata()+"");
+        mStartHr = createSpinner(12, R.id.start_hr,true,view,mAlarmHelper,true);//create Spinner of StartHr
+        mStartMin = createSpinner(60, R.id.start_min,false,view,mAlarmHelper,true);//create Spinner of StartMin
+        mFinishHr = createSpinner(12, R.id.fin_hr, true, view,mAlarmHelper,false);//create Spinner of FinishHr
+        mFinishMin = createSpinner(60, R.id.fin_min, false, view, mAlarmHelper, false);//create Spinner of FinishMin
+        mStartAP = createSpinnerAmPm(R.id.start_AP, view,mAlarmHelper,true);//create Spinner of StartAmPm
+        mFinishAP = createSpinnerAmPm(R.id.fin_AP, view,mAlarmHelper,false);//create Spinner of FinishAmPm
+        //create checkbok Sun-Sat
         mChkboxSun = (CheckBox)view.findViewById(R.id.chkboxSun);
         mChkboxMon = (CheckBox)view.findViewById(R.id.chkboxMon);
         mChkboxTue = (CheckBox)view.findViewById(R.id.chkboxTue);
@@ -71,9 +72,10 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         mChkboxThu = (CheckBox)view.findViewById(R.id.chkboxThu);
         mChkboxFri = (CheckBox)view.findViewById(R.id.chkboxFri);
         mChkboxSat = (CheckBox)view.findViewById(R.id.chkboxSat);
+        //create Spinner fro frquency
         mFreq = createSpinnerFrq(R.id.frq_min, view,mAlarmHelper);
 
-        //check checkbox tick
+        //check checkbox tick from sqlDB Alarm
         if(mAlarmHelper.checkdata()==1) {
             Alarm alarm = mAlarmHelper.getAlarm();
             String day = alarm.getDay();
@@ -97,6 +99,8 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //after click button "set"
+                //check bok that ticked
                 if(mChkboxSun.isChecked()){
                     mdays += "1";
                 }
@@ -140,7 +144,7 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
                     mdays += "0";
                 }
 
-                //keep data
+                //keep data to sqlDB Alarm
                     Alarm alarm = new Alarm();
                     alarm.setId(1);
                     alarm.setStarthr(mStartHr.getSelectedItem().toString());
@@ -158,24 +162,20 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
                     }
                 Intent mServiceIntent = new Intent(getActivity(), AlarmReceiver.class);
                 pendingIntent = PendingIntent.getBroadcast(getActivity(),0,mServiceIntent,0);
-                start();
-//                FragmentTransaction tx = getFragmentManager().beginTransaction();
-//                tx.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-//                tx.replace(R.id.container, new MainFragment());
-//                tx.addToBackStack(null);
+                start();//start countdown timer
                 Toast.makeText(getActivity(), "SetAlarm Successful", Toast.LENGTH_SHORT).show();
-//                tx.commit();
             }
         });
         return view;
     }
 
+    //create spinner
     public Spinner createSpinner(int num,int id,boolean isHr,View view,DBAlarmHelper mAlarmHelper,boolean isStart)
     {
         Spinner spinner = (Spinner)view.findViewById(id);
         String[] numm = new String[num];
         ArrayAdapter<String> adapter;
-        if(isHr) {
+        if(isHr) {//check that Hr or min
             for (int i = 1; i <= num; i++) {
                 if(i<10)
                     numm[i - 1] = "0" + i;
@@ -185,9 +185,9 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
             adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, numm);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
-            if(mAlarmHelper.checkdata()==0)
-                spinner.setSelection(11);
-            else
+            if(mAlarmHelper.checkdata()==0)//check that sqlDB has data?
+                spinner.setSelection(11);//set initial spinner "12"
+            else//has data get data for show user
             {
                 Alarm alarm = mAlarmHelper.getAlarm();
                 if(isStart) {
@@ -201,7 +201,7 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
                 }
             }
         }
-        else {
+        else {//for minite
             for (int i = 0; i < num; i++) {
                 if(i<10)
                     numm[i] = "0" + i;
@@ -211,7 +211,7 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
             adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, numm);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
-            if(mAlarmHelper.checkdata()==1)
+            if(mAlarmHelper.checkdata()==1)//check that sqlDB has data? get data to show user
             {
                 Alarm alarm = mAlarmHelper.getAlarm();
                 if(isStart) {
@@ -227,7 +227,7 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         }
         return spinner;
     }
-
+    //create Spinner for Am Pm
     public Spinner createSpinnerAmPm(int id,View view,DBAlarmHelper mAlarmHelper,boolean isStart)
     {
         Spinner spinner = (Spinner)view.findViewById(id);
@@ -235,12 +235,12 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, numm);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        if(mAlarmHelper.checkdata()==1)
+        if(mAlarmHelper.checkdata()==1)//if has data
         {
             Alarm alarm = mAlarmHelper.getAlarm();
             if(isStart) {
                 String ap = alarm.getStartinterval();
-                if(ap.equals("AM"))
+                if(ap.equals("AM"))//check that AM or PM
                     spinner.setSelection(0);
                 else
                     spinner.setSelection(1);
@@ -256,7 +256,7 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         }
         return spinner;
     }
-
+    //create Spinner for frequency
     public Spinner createSpinnerFrq(int id,View view,DBAlarmHelper mAlarmHelper)
     {
         Spinner spinner = (Spinner)view.findViewById(id);
@@ -264,12 +264,12 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, numm);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        if(mAlarmHelper.checkdata()==1)
+        if(mAlarmHelper.checkdata()==1)//has data?
         {
             Alarm alarm = mAlarmHelper.getAlarm();
             String frq = alarm.getFrq();
             int frqint = -1;
-            if(frq.equals("15"))
+            if(frq.equals("15"))//check that what value in database equal? for check
                 frqint = 0;
             else if(frq.equals("30"))
                 frqint = 1;
@@ -285,6 +285,7 @@ Log.i("xx",mAlarmHelper.checkdata()+"");
         }
         return spinner;
     }
+    //start countdown timer
     public void start() {
         /*manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();

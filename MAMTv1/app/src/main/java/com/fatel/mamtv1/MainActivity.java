@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Cache.getInstance().putData("MainActivityContext", this);
+        Cache.getInstance().putData("MainActivityContext", this);//keep Context in Cache
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             firstName = bundle.getString("firstname");
@@ -74,10 +74,11 @@ public class MainActivity extends AppCompatActivity {
             passimg = new Bundle();
             passimg.putString("id", id);
         }
+        //load profile picture to show
         Glide.with(this).load("https://graph.facebook.com/" + UserManage.getInstance(this).getCurrentFacebookId() + "/picture?type=large").into(profilepic);
         // Intent alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
         //pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();//initial fragment MainFragment
         MainFragment fragobj = new MainFragment();
         if (bundle != null)
             fragobj.setArguments(passimg);
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         tx.commit();
         NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
+        //set onClick Profile (Header of NavigationView) for transmit to ProfileFragment
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    //select item in Navigation Drawer(menu)
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the planet to show based on
         // position
@@ -242,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.syncState();
     }
 
-
+    //onClick for ChoosePosture in ChoosePostureFragmeent 1-9
     public void linkPosture1(View view) {
         Intent intent = new Intent(this, PostureActivity.class);
         intent.putExtra("value", 0);
@@ -297,12 +299,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //onClick for link to CreateGroup page for GroupFragment
     public void linkCreateGroup(View view)
     {
         Intent intent = new Intent(this, CreateGroupActivity.class);
         startActivity(intent);
     }
-
+    //onClick for link to JoinGroup page for GroupFragment
     public void linkJoinGroup(View view)
     {
         Intent intent = new Intent(this, JoinGroupActivity.class);
