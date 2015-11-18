@@ -37,7 +37,7 @@ public class EventController {
         event.setPostures(postures);
         this.dailyEvent = event;
         HashMap<String ,Object> JSON = StatusDescription.createProcessStatus(true);
-        JSON.put("event",this.dailyEvent.getGeneralValues());
+        JSON.put("event",this.dailyEvent);
 
         return converter.HashMapToJSON(JSON);
     }
