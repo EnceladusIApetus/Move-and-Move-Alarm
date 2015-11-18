@@ -28,14 +28,6 @@ public class User extends Model{
     public User()
     {
         this.tableName = "user"; //table name of user data in the database
-<<<<<<< HEAD
-        //this.addRequiredField("firstName"); //add required fields that must be filled before saving
-        //this.addRequiredField("lastName");
-        //this.addRequiredField("userName");
-        //this.addRequiredField("email");
-        //this.addRequiredField("password");
-=======
->>>>>>> 2d06c56b672e4c3fa34011c157688484227600d1
         temp_scoreLogList = new ArrayList<>();
         temp_activityLogList = new ArrayList<>();
     }

@@ -13,7 +13,7 @@ public class UserController {
     private Converter converter = Converter.getInstance();
     private DatabaseInterface databaseInquirer = SQLInquirer.getInstance();
     private Crypto crypto = Crypto.getInstance();
-    
+
     @RequestMapping("/user/findByID")
     public String findByID(@RequestParam(value="id", required = true, defaultValue = "0") int id)
     {
@@ -50,7 +50,7 @@ public class UserController {
     {
         ArrayList<HashMap<String, Object>> rankList = new ArrayList<>(); //create list of rank user
         ArrayList<HashMap<String, Object>> userDataList = new ArrayList<>(); //create list to keep each user's data
-        
+
         startRank = Math.abs(startRank); //convert to positive integer
         try {
             databaseInquirer.addBatch("SET @rownum := 0"); //create temporary variable on database to create rank
@@ -137,7 +137,7 @@ public class UserController {
 
         if((converter.toString(userData.get("password"))).length() < 6)
             return converter.HashMapToJSON(StatusDescription.createProcessStatus(false, "Password should not be less than 6 letters."));
-        
+
         User user = new User();
         user.setUsername(converter.toString(userData.get("userName")));
         user.setEmail(converter.toString(userData.get("email")));
@@ -361,7 +361,6 @@ public class UserController {
         if(group != null)
             JSON.put("group", group.getGeneralValues());
 
->>>>>>> 2d06c56b672e4c3fa34011c157688484227600d1
         JSON.put("user",user.getGeneralValues());
 
         return converter.HashMapToJSON(JSON);
