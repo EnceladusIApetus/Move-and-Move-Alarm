@@ -147,7 +147,7 @@ public class Activity extends AppCompatActivity {
                 //Intent intent = new Intent(Activity.this, MainActivity.class);
                 //startActivity(intent);
 
-                requesAddscore();
+                requestAddScore();
             }
         }.start();
 
@@ -223,7 +223,7 @@ public class Activity extends AppCompatActivity {
        // manager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + interval, pendingIntent);
     }
 
-    public void requesAddscore()
+    public void requestAddScore()
     {
         final Converter converter = Converter.getInstance();
         String url = HttpConnector.URL + "user/increaseScore";
@@ -235,7 +235,7 @@ public class Activity extends AppCompatActivity {
 
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
                         if((boolean) data.get("status")) {
-                            makeToast("Sync process completed.");
+                            makeToast("Done activity! Get 1 point.");
                             UserManage.getInstance(Activity.this).addScore(1, Activity.this);
                         }
                         else {
@@ -246,7 +246,7 @@ public class Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
                 Log.i("volley", volleyError.toString());
-                makeToast("Cannot connect to server. Please check the Internet setting.");
+                makeToast("Cannot connect to server or internal server error.");
             }
         }) { //define POST parameters
             @Override

@@ -149,6 +149,7 @@ public class EventActivity extends AppCompatActivity {
 
                 //send score to back
                 requesAddscore();
+                finish();
             }
         }.start();
 
@@ -234,7 +235,7 @@ public class EventActivity extends AppCompatActivity {
 
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
                         if((boolean) data.get("status")) {
-                            makeToast("Sync process completed.");
+                            makeToast("Group Event! Score x2");
                         }
                         else {
                             makeToast(converter.toString(data.get("description")));
@@ -244,7 +245,7 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) { //when error listener is activated
                 Log.i("volley", volleyError.toString());
-                makeToast("Cannot connect to server. Please check the Internet setting.");
+                makeToast("Cannot connect to server or internal server error.");
             }
         }) { //define POST parameters
             @Override

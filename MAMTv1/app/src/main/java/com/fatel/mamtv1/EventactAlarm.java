@@ -80,6 +80,7 @@ public class EventactAlarm extends AppCompatActivity {
         startActivity(intent);
         v.cancel();
         m.reset();
+        finish();
     }
 
     public void linkHome(View view){
@@ -108,6 +109,7 @@ public class EventactAlarm extends AppCompatActivity {
         //int interval = 60*1000*1;
         //PendingIntent pendingIntent = PendingIntent.getBroadcast(actAlarm.this, 0, i, 0);
         //manager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + interval, pendingIntent);
+        finish();
     }
 
 }

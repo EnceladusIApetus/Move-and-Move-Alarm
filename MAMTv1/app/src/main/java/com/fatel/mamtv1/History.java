@@ -4,6 +4,8 @@ import android.content.Context;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import java.util.HashMap;
+
 /**
  * Created by Monthon on 16/11/2558.
  */
@@ -86,5 +88,14 @@ public class History {
     public static History findhistory(int idUser,Context context){
         HistoryHelper historyHelper = new HistoryHelper(context);
         return historyHelper.getHistoryUser(idUser);
+    }
+
+    public HashMap<String, Object> getGeneralValues()
+    {
+        HashMap<String, Object> temp = new HashMap<>();
+        temp.put("numberOfAccept", this.getNumberOfAccept());
+        temp.put("cancelActivity", this.getCancelActivity());
+
+        return temp;
     }
 }

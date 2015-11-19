@@ -69,6 +69,8 @@ public class actAlarm extends AppCompatActivity {
         //history
         HistoryHelper mhistoryHelper = new HistoryHelper(this);
         History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(this).getCurrentIdUser());
+        if(history == null)
+            history = new History(UserManage.getInstance(actAlarm.this).getCurrentIdUser());
         history.addaccept(1);
         history.save(this);
         Log.i("historyacc", UserManage.getInstance(this).getCurrentIdUser() + "");
@@ -84,8 +86,10 @@ public class actAlarm extends AppCompatActivity {
         //history
         HistoryHelper mhistoryHelper = new HistoryHelper(this);
         History history = mhistoryHelper.getHistoryUser(UserManage.getInstance(this).getCurrentIdUser());
-        history.addcancel(1);
-        history.save(this);
+        if(history!=null){
+            history.addcancel(1);
+            history.save(this);
+        }
         Log.i("historycancel", UserManage.getInstance(this).getCurrentIdUser()+ "");
         Log.i("historycancel", history.getCancelActivity() + "");
         Log.i("historycancel", history.gettotal() + "");
