@@ -40,6 +40,8 @@ public class Activity extends AppCompatActivity {
     ArrayList<Posture> img ;
     int exerciseImg;
     String exerciseDes;
+    CountDownTimer time1;
+    CountDownTimer time2;
 
     private static final String FORMAT = "%02d:%02d";
     public static Context context;
@@ -74,7 +76,8 @@ public class Activity extends AppCompatActivity {
 
         // Start the animation (looped playback by default).
         frameAnimation.start();
-        new CountDownTimer(15000, 1000) {
+
+        time1 = new CountDownTimer(15000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtR.setText("Remain Time   " + String.format(FORMAT,
@@ -107,8 +110,7 @@ public class Activity extends AppCompatActivity {
         }.start();
 
 
-
-        new CountDownTimer(60000, 1000) {
+        time2 = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtA.setText("Activity Time   "+String.format(FORMAT,
@@ -131,6 +133,14 @@ public class Activity extends AppCompatActivity {
     public void linkHome(View view)
     {
         //history
+        if(time1!=null){
+            time1.cancel();
+            time1=null;
+        }
+        if(time2!=null){
+            time2.cancel();
+            time2=null;
+        }
         History history = History.findHistory(UserManage.getInstance(this).getCurrentIdUser(),this);
         history.subaccept(1);
         history.addcancel(1);
