@@ -118,6 +118,19 @@ public class UserManage {
     }
     public void loginFBUser(String facebookID,String facebookFirstName,Context context){
 
+        User user = new User(0, facebookID,facebookFirstName);
+        UserManage.getInstance(context).setCurrentUser(user);
+        UserManage.getInstance(context).getCurrentUser().setLogin(1);
+        UserManage.getInstance(context).getCurrentUser().save(context);
+
+        Toast toast = Toast.makeText(context, "Hello "+facebookFirstName, Toast.LENGTH_SHORT);
+        toast.show();
+        context.startActivity(new Intent(context, MainActivity.class));
+        if(Login_Activity.instance != null)
+            Login_Activity.instance.finish();
+
+        //disable loginFb /w server
+        /*
         String url = HttpConnector.URL + "user/loginFacebook"; //url of login API
         final String id = facebookID;
         final String name = facebookFirstName;
@@ -169,6 +182,7 @@ public class UserManage {
                             context.startActivity(new Intent(context, MainActivity.class));
                             if(Login_Activity.instance != null)
                                 Login_Activity.instance.finish();
+
                         }
                         else {
                             Toast toast = Toast.makeText(context, converter.toString(data.get("description")), Toast.LENGTH_SHORT);
@@ -198,7 +212,7 @@ public class UserManage {
         };
 
         HttpConnector.getInstance(context).addToRequestQueue(loginFBRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
-
+*/
     }
     public void logoutUser(Context context){
         currentUser.setLogin(0);
