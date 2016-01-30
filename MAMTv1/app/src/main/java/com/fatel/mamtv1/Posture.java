@@ -2,6 +2,8 @@ package com.fatel.mamtv1;
 import android.content.Context;
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
+
 /**
  * Created by Administrator on 23/10/2558.
  */
@@ -54,6 +56,14 @@ public class Posture {
         }
         else
             return postureHelper.getPosture(idPosture);
+    }
+    public static ArrayList<Posture> findMode(int mode,Context context){
+        PostureHelper postureHelper = new PostureHelper(context);
+        if (postureHelper.getPostureMode(mode)==null){
+            return null;
+        }
+        else
+            return postureHelper.getPostureMode(mode);
     }
     public static int getPostureCount(Context context){
         PostureHelper postureHelper = new PostureHelper(context);
