@@ -11,6 +11,7 @@ public class Posture {
     private int idPosture;
     private int image;
     private String description;
+    private int mode;
 
     private PostureHelper helper;
 
@@ -20,19 +21,22 @@ public class Posture {
         public static final String IDPOSTURE = "idPosture";
         public static final String IMAGE= "image";
         public static final String DESCRIPTION = "description";
+        public static final String MODE = "mode";
     }
 
-    public Posture(int id,int idPosture, int image, String description){
+    public Posture(int id,int idPosture, int image, String description,int mode){
         this.id=id;
         this.idPosture = idPosture;
         this.image=image;
         this.description=description;
+        this.mode = mode;
     }
-    public Posture(int idPosture,int image,String description){
+    public Posture(int idPosture,int image,String description,int mode){
         this.id=-1;
         this.idPosture = idPosture;
         this.image=image;
         this.description=description;
+        this.mode=mode;
     }
     public void save (Context context){
         PostureHelper postureHelper = new PostureHelper(context);
@@ -73,6 +77,9 @@ public class Posture {
       return this.description;
 
     }
+    public int getMode(){
+        return this.mode;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -88,4 +95,5 @@ public class Posture {
     public void setDescription(String description) {
         this.description = description;
     }
+    public void setMode(int mode){ this.mode = mode; }
 }

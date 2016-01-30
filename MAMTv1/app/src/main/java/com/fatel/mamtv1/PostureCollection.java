@@ -23,8 +23,8 @@ public class PostureCollection {
         return instance;
     }
 
-    public void addImage(int image,String description,Context context){
-        Posture posture = new Posture(count,image,description);
+    public void addImage(int image,String description,int mode,Context context){
+        Posture posture = new Posture(count,image,description,mode);
         posture.save(context);
         collection.add(posture);
         count++;
@@ -32,29 +32,29 @@ public class PostureCollection {
 
     public void initial (Context context){
         if(Posture.getPostureCount(context)<13) {
-            addImage(R.drawable.pos1_1, "ตามองตรง \nหมุนคอไปขวามือช้าๆ \nหมุนกลับ \nหมุนคอไปซ้ายมือช้าๆ",context);
-            addImage(R.drawable.pos1_2, "ตามองตรง \nเอียงคอไปขวามือช้าๆ \nเอียงกลับ \nเอียงคอไปซ้ายมือช้าๆ", context);
-            addImage(R.drawable.pos1_3, "ยืดต้นขา ยืดเข่า", context);
-            addImage(R.drawable.pos2_1, "บริหารข้อเท้า", context);
-            addImage(R.drawable.pos2_2, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos3_1, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos3_2, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos3_3, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos3_4, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos3_5, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos4_1, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos4_2, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos4_3, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos5_1, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos5_2, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_1, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_2, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_3, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_4, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_5, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_6, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_7, "ยืดกล้ามเนื้อคอ", context);
-            addImage(R.drawable.pos6_8, "ยืดกล้ามเนื้อคอ", context);
+            addImage(R.drawable.pos1_1, "ตามองตรง \nหมุนคอไปขวามือช้าๆ \nหมุนกลับ \nหมุนคอไปซ้ายมือช้าๆ",1,context);
+            addImage(R.drawable.pos1_2, "ตามองตรง \nเอียงคอไปขวามือช้าๆ \nเอียงกลับ \nเอียงคอไปซ้ายมือช้าๆ",1, context);
+            addImage(R.drawable.pos1_3, "ยืดต้นขา ยืดเข่า",1, context);
+            addImage(R.drawable.pos2_1, "บริหารข้อเท้า",2, context);
+            addImage(R.drawable.pos2_2, "ยืดกล้ามเนื้อคอ",2, context);
+            addImage(R.drawable.pos3_1, "ยืดกล้ามเนื้อคอ",3, context);
+            addImage(R.drawable.pos3_2, "ยืดกล้ามเนื้อคอ",3, context);
+            addImage(R.drawable.pos3_3, "ยืดกล้ามเนื้อคอ",3, context);
+            addImage(R.drawable.pos3_4, "ยืดกล้ามเนื้อคอ",3, context);
+            addImage(R.drawable.pos3_5, "ยืดกล้ามเนื้อคอ",3, context);
+            addImage(R.drawable.pos4_1, "ยืดกล้ามเนื้อคอ",4, context);
+            addImage(R.drawable.pos4_2, "ยืดกล้ามเนื้อคอ",4, context);
+            addImage(R.drawable.pos4_3, "ยืดกล้ามเนื้อคอ",4, context);
+            addImage(R.drawable.pos5_1, "ยืดกล้ามเนื้อคอ",5, context);
+            addImage(R.drawable.pos5_2, "ยืดกล้ามเนื้อคอ",5, context);
+            addImage(R.drawable.pos6_1, "ยืดกล้ามเนื้อคอ",5, context);
+            addImage(R.drawable.pos6_2, "ยืดกล้ามเนื้อคอ",6, context);
+            addImage(R.drawable.pos6_3, "ยืดกล้ามเนื้อคอ",6, context);
+            addImage(R.drawable.pos6_4, "ยืดกล้ามเนื้อคอ",6, context);
+            addImage(R.drawable.pos6_5, "ยืดกล้ามเนื้อคอ",6, context);
+            addImage(R.drawable.pos6_6, "ยืดกล้ามเนื้อคอ",6, context);
+            addImage(R.drawable.pos6_7, "ยืดกล้ามเนื้อคอ",6, context);
+            addImage(R.drawable.pos6_8, "ยืดกล้ามเนื้อคอ",6, context);
 
         }
         else{

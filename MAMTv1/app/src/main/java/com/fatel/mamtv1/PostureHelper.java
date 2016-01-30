@@ -22,12 +22,13 @@ public class PostureHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         String CREATE_POSTURE_TABLE = String.format("CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s INTEGER, %s TEXT)",
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT,%s INTEGER, %s INTEGER, %s TEXT, %s INTEGER)",
                 Posture.TABLE,
                 Posture.Column.ID,
                 Posture.Column.IDPOSTURE,
                 Posture.Column.IMAGE,
-                Posture.Column.DESCRIPTION);
+                Posture.Column.DESCRIPTION,
+                Posture.Column.MODE);
         db.execSQL(CREATE_POSTURE_TABLE);
     }
     @Override
@@ -42,6 +43,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         values.put(Posture.Column.IDPOSTURE, posture.getIdPosture());
         values.put(Posture.Column.IMAGE, posture.getImage());
         values.put(Posture.Column.DESCRIPTION, posture.getDescription());
+        values.put(Posture.Column.MODE, posture.getMode());
         long id =sqLiteDatabase.insert(Posture.TABLE, null, values);
         sqLiteDatabase.close();
         return ((int)id);
@@ -52,6 +54,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         values.put(Posture.Column.IDPOSTURE,posture.getIdPosture());
         values.put(Posture.Column.IMAGE,posture.getImage());
         values.put(Posture.Column.DESCRIPTION, posture.getDescription());
+        values.put(Posture.Column.MODE, posture.getMode());
         int row = sqLiteDatabase.update(Posture.TABLE,
                 values,
                 Posture.Column.ID + " = ? ",
@@ -61,7 +64,7 @@ public class PostureHelper extends SQLiteOpenHelper {
     public Posture getPosture(int idPosture){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Posture.TABLE, new String[]{Posture.Column.ID,
-                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE, Posture.Column.DESCRIPTION
+                        Posture.Column.IDPOSTURE, Posture.Column.IMAGE, Posture.Column.DESCRIPTION, Posture.Column.MODE
                 }, Posture.Column.IDPOSTURE + " = ? ",
                 new String[]{String.valueOf(idPosture)}, null, null, null, null);
         Posture posture;
@@ -72,7 +75,7 @@ public class PostureHelper extends SQLiteOpenHelper {
         if(check){
 
             posture = new Posture(cursor.getInt(0), cursor.getInt(1),
-                    cursor.getInt(2), cursor.getString(3));
+                    cursor.getInt(2), cursor.getString(3), cursor.getInt(4));
 
             cursor.close();
             db.close();
