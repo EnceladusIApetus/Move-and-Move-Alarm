@@ -125,15 +125,10 @@ public class UserController {
     public String createUser(@RequestParam(value="JSON", required = true, defaultValue = "") String JSON)
     {
         HashMap<String, Object> userData = converter.JSONToHashMap(JSON); //convert JSON string to HashMap format
+        User[] username_match = User.where("userName", "=", converter.toString(userData.get("userName"))); //check match user name
 
-        String userName = converter.toString(userData.get("userName"));
-
-        if(userName != null) {
-            User[] username_match = User.where("userName", "=", converter.toString(userData.get("userName"))); //check match user name
-
-            if(username_match.length > 0) //if this name is already used
-                return converter.HashMapToJSON(StatusDescription.createProcessStatus(false, "This user name is already used by other user."));
-        }
+        if(username_match.length > 0) //if this name is already used
+            return converter.HashMapToJSON(StatusDescription.createProcessStatus(false, "This user name is already used by other user."));
 
         if((converter.toString(userData.get("password"))).length() < 6)
             return converter.HashMapToJSON(StatusDescription.createProcessStatus(false, "Password should not be less than 6 letters."));
@@ -168,21 +163,26 @@ public class UserController {
     @RequestMapping("/user/updateUser")
     public String updateUser(@RequestParam(value="JSON", required = true, defaultValue = "") String JSON)
     {
-        HashMap<String, Object> userData = converter.JSONToHashMap(JSON); //convert receive data to HashMap format
+        HashMap<String, Object> data = converter.JSONToHashMap(JSON); //convert receive data to HashMap format
+        HashMap<String, Object> userData = converter.JSONToHashMap(converter.toString(data.get("user")));
         User user = User.find(converter.toInt(userData.get("id")));
 
         if(user == null)  //if user does not exist
             return converter.HashMapToJSON(StatusDescription.createProcessStatus(false, "This user does not exist."));
 
+        user.setEmail(converter.toString(userData.get("email")));
+
         try {
             user.setFirstName(converter.toString(userData.get("firstName")));
             user.setLastName(converter.toString(userData.get("lastName")));
-            user.setGender(converter.toInt(userData.get("gender")));
+            if(converter.toString(userData.get("gender")).equals("female"))
+                user.setGender(0);
+            else if(converter.toString(userData.get("gender")).equals("male"))
+                user.setGender(1);
             user.setAge(converter.toInt(userData.get("age")));
             user.setFacebookID(converter.toString(userData.get("facebookID")));
             user.setFacebookFirstName(converter.toString(userData.get("facebookFirstName")));
             user.setFacebookLastName(converter.toString(userData.get("facebookLastName")));
-            user.setEmail(converter.toString(userData.get("email")));
         }
         catch (Exception e) {
             //do nothing
@@ -306,17 +306,62 @@ public class UserController {
         try {
             user = User.where("userName", "=", userName)[0]; //user name is unique so when query data by using user name, the database must return only one row
             currentPassword = crypto.decryption(user.getPassword()); //decrypt and check
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         if(user == null || !currentPassword.equals(password)) //if user does not exist or password missmatch
             return converter.HashMapToJSON(StatusDescription.createProcessStatus(false, "User does not exist or password is incorrect."));
 
+        Group group = null;
+        try {
+            HashMap<String, Object> userRawData = databaseInquirer.where("user", "id", "=", "" + user.getID()).get(0);
+            group = Group.find(converter.toInt(userRawData.get("groupID")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         HashMap<String, Object> JSON = StatusDescription.createProcessStatus(true); //create response object and put the data
         JSON.put("user", user.getGeneralValues());
 
+        if(group != null)
+            JSON.put("group", group.getGeneralValues());
+
         return converter.HashMapToJSON(JSON); //convert to JSON string
+    }
+
+    @RequestMapping("/user/loginFacebook")
+    public String loginFacebook(@RequestParam(value = "facebookID", required = true, defaultValue = "0")String facebookID,
+                                @RequestParam(value = "facebookFirstName", required = true, defaultValue = "0")String facebookFirstName)
+    {
+        User user;
+        HashMap<String, Object> JSON;
+        try {
+            user = User.where("facebookID","=",facebookID)[0];
+            user.setFacebookFirstName(facebookFirstName);
+            JSON = StatusDescription.createProcessStatus(true);
+        }
+        catch (Exception e) {
+            user = new User();
+            user.setFacebookID(facebookID);
+            user.setFacebookFirstName(facebookFirstName);
+            JSON = user.save();
+        }
+
+        Group group = null;
+        try {
+            HashMap<String, Object> userRawData = databaseInquirer.where("user", "facebookID", "=", "" + user.getFacebookID()).get(0);
+            group = Group.find(converter.toInt(userRawData.get("groupID")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(group != null)
+            JSON.put("group", group.getGeneralValues());
+
+        JSON.put("user",user.getGeneralValues());
+
+        return converter.HashMapToJSON(JSON);
     }
 
     public void changeDatabaseInquirer(DatabaseInterface databaseInquirer)
