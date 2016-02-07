@@ -27,22 +27,22 @@
         android:onClick="linkLogin"
         />
 
-    <Button
-        android:id="@+id/create_btn"
-        android:text="Sign up"
-        android:layout_marginTop="20dp"
-        android:textColor="#FFF5F5"
-        android:textSize="20sp"
-        android:layout_below="@+id/login_btn"
-        android:layout_gravity="center"
-        android:textAllCaps="false"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:background="@drawable/buttonshape"
-        android:shadowColor="#919191"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="5"
-        android:onClick="linkCreate"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/create_btn"-->
+        <!--android:text="Sign up"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:textColor="#FFF5F5"-->
+        <!--android:textSize="20sp"-->
+        <!--android:layout_below="@+id/login_btn"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:background="@drawable/buttonshape"-->
+        <!--android:shadowColor="#919191"-->
+        <!--android:shadowDx="3"-->
+        <!--android:shadowDy="3"-->
+        <!--android:shadowRadius="5"-->
+        <!--android:onClick="linkCreate"-->
+        <!--/>-->
 </LinearLayout>

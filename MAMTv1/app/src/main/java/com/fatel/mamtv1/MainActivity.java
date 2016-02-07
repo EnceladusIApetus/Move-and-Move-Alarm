@@ -17,8 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import com.facebook.login.LoginManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +37,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
@@ -53,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       // Intent alarmIntent = new Intent(MainActivity.this, AlarmReceiver.class);
-        //pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.container, new MainFragment());
 
         if(UserManage.getInstance(this).getCurrentIdGroup() != 0)
             requestGroupInfo();
@@ -87,12 +81,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         MainFragment fragobj = new MainFragment();
         tx.replace(R.id.container, fragobj);
-
         tx.commit();
         NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
-
-        header = (TextView) findViewById(R.id.profile);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             requestSendGroupProgress();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

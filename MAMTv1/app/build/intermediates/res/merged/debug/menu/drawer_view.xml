@@ -32,4 +32,4 @@
             android:id="@+id/nav_logout_fragment"
             android:title="Log out" />
     </group>
-</menu><!-- From: file:/C:/Users/kid14/Documents/Move-Alarm/Move-and-Move-Alarm/MAMTv1/app/src/main/res/menu/drawer_view.xml -->
+</menu><!-- From: file:/D:/work/MoveAlarm/MAMTv1/app/src/main/res/menu/drawer_view.xml -->

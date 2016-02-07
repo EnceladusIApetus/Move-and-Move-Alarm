@@ -162,7 +162,6 @@ public class Login_Activity extends AppCompatActivity {
             UserManage.getInstance(this).setFacebookLastName(profile.getLastName(), this);
 
             Intent intent = new Intent(Login_Activity.this, MainActivity.class);
-            startActivity(intent);
             Toast.makeText(this, "Hello "+profile.getFirstName(), Toast.LENGTH_SHORT).show();
         }
     }

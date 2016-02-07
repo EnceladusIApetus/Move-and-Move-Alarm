@@ -60,16 +60,16 @@
             android:name="com.fatel.mamtv1.Intro_Activity"
             android:label="@string/title_activity_intro_"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.fatel.mamtv1.Login_Activity"
+            android:label="@string/title_activity_intro_"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.fatel.mamtv1.Login_Activity"
-            android:label="@string/title_activity_login_"
-            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.fatel.mamtv1.Create_Account_Activity"
