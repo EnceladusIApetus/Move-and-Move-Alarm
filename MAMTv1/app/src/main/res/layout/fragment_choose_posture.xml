@@ -10,7 +10,7 @@
 
     <Button
         android:id="@+id/post1"
-        android:text="Posture #1"
+        android:text="ท่าออกกำลังกาย #1"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -35,7 +35,7 @@
     <Button
         android:id="@+id/post2"
         android:layout_below="@id/post1"
-        android:text="Posture #2"
+        android:text="ท่าออกกำลังกาย #2"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -58,7 +58,7 @@
     <Button
         android:id="@+id/post3"
         android:layout_below="@id/post2"
-        android:text="Posture #3"
+        android:text="ท่าออกกำลังกาย #3"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -81,7 +81,7 @@
     <Button
         android:id="@+id/post4"
         android:layout_below="@id/post3"
-        android:text="Posture #4"
+        android:text="ท่าออกกำลังกาย #4"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -104,7 +104,7 @@
     <Button
         android:id="@+id/post5"
         android:layout_below="@id/post4"
-        android:text="Posture #5"
+        android:text="ท่าออกกำลังกาย #5"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -127,7 +127,7 @@
     <Button
         android:id="@+id/post6"
         android:layout_below="@id/post5"
-        android:text="Posture #6"
+        android:text="ท่าออกกำลังกาย #6"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -150,7 +150,7 @@
     <Button
         android:id="@+id/post7"
         android:layout_below="@id/post6"
-        android:text="Posture #7"
+        android:text="ท่าออกกำลังกาย #7"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -173,7 +173,7 @@
     <Button
         android:id="@+id/post8"
         android:layout_below="@id/post7"
-        android:text="Posture #8"
+        android:text="ท่าออกกำลังกาย #8"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -196,7 +196,7 @@
     <Button
         android:id="@+id/post9"
         android:layout_below="@id/post8"
-        android:text="Posture #9"
+        android:text="ท่าออกกำลังกาย #9"
         android:gravity="center"
         android:textStyle="bold"
 
@@ -220,7 +220,7 @@
         <Button
             android:id="@+id/post10"
             android:layout_below="@id/post9"
-            android:text="Posture #10"
+            android:text="ท่าออกกำลังกาย #10"
             android:gravity="center"
             android:textStyle="bold"
 
@@ -244,7 +244,7 @@
         <Button
             android:id="@+id/post11"
             android:layout_below="@id/post10"
-            android:text="Posture #11"
+            android:text="ท่าออกกำลังกาย #11"
             android:gravity="center"
             android:textStyle="bold"
 
@@ -268,7 +268,7 @@
         <Button
             android:id="@+id/post12"
             android:layout_below="@id/post11"
-            android:text="Posture #12"
+            android:text="ท่าออกกำลังกาย #12"
             android:gravity="center"
             android:textStyle="bold"
 
@@ -292,7 +292,7 @@
         <Button
             android:id="@+id/post13"
             android:layout_below="@id/post12"
-            android:text="Posture #13"
+            android:text="ท่าออกกำลังกาย #13"
             android:gravity="center"
             android:textStyle="bold"
 

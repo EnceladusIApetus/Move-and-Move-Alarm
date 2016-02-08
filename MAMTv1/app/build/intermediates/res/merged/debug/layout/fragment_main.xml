@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:textColor="@android:color/black"
-            android:text="Score : " />
+            android:text="คะแนน : " />
         <TextView
             android:layout_alignRight="@id/scoreText"
             android:id="@+id/scoreNum"
@@ -61,7 +61,7 @@
 
             android:textSize="15sp"
             android:textColor="@android:color/black"
-            android:text="Start" />
+            android:text="เริ่มต้น" />
         <TextView
             android:id="@+id/starthr"
             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="@android:color/black"
-            android:text="Stop" />
+            android:text="สิ้นสุด" />
 
         <TextView
             android:id="@+id/hrstop"
@@ -172,4 +172,4 @@
 
 
 </RelativeLayout>
-<!-- From: file:/D:/work/MoveAlarm/MAMTv1/app/src/main/res/layout/fragment_main.xml -->
+<!-- From: file:/C:/Users/kid14/Documents/GitHub/MoveV2/Move-and-Move-Alarm/MAMTv1/app/src/main/res/layout/fragment_main.xml -->

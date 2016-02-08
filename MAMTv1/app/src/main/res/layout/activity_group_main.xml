@@ -29,7 +29,7 @@
 
                 <TextView
                     android:id="@+id/textView21"
-                    android:text="Group Code : "
+                    android:text="รหัสกลุ่ม : "
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:textSize="20sp"
@@ -61,7 +61,7 @@
 
                 <TextView
                     android:id="@+id/textView31"
-                    android:text="Group Name : "
+                    android:text="ชื่อกลุ่ม : "
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:textSize="20sp"
@@ -101,7 +101,7 @@
                     android:id="@+id/textView41"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="Admin :  "
+                    android:text="ผู้ตั้งกลุ่ม :  "
                     android:textSize="20sp"
                     android:textColor="#ffffff"/>
 
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="Score :  "
+                    android:text="คะแนน :  "
                     android:textSize="20sp"
                     android:textColor="#ffffff"/>
 
@@ -174,7 +174,7 @@
                 <TextView
 
                     android:id="@+id/Event"
-                    android:text="Event time : "
+                    android:text="เวลากิจกรรมพิเศษ : "
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:textSize="20sp"
@@ -248,7 +248,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="#ff8c00"
-        android:text="Member : "
+        android:text="สมาชิก : "
         android:layout_below="@id/relativeLayout"/>
 
 
