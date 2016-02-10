@@ -79,7 +79,7 @@ public class Activity extends AppCompatActivity {
         time1 = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtR.setText("Remain Time   " + String.format(FORMAT,
+                txtR.setText("เวลาท่าบริหาร   " + String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
@@ -88,7 +88,7 @@ public class Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                txtR.setText("Remain Time done!");
+                txtR.setText("เสร็จสิ้น!");
                 frameAnimation.stop();
                 count++;
                 if(count<img.size()) {
@@ -110,10 +110,10 @@ public class Activity extends AppCompatActivity {
 
 
 
-       time2 = new CountDownTimer(120000, 1000) {
+        time2 = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtA.setText("Activity Time   "+String.format(FORMAT,
+                txtA.setText("เวลากิจกรรม   "+String.format(FORMAT,
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
                                 TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
@@ -121,7 +121,7 @@ public class Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                txtA.setText("Activity Time done!");
+                txtA.setText("เสร็จสิ้น!");
                 Intent i1 = new Intent(Activity.this, Camera.class);
                 startActivity(i1);
                 requestAddScore();

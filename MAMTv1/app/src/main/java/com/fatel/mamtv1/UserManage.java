@@ -117,7 +117,6 @@ public class UserManage {
 
     }
     public void loginFBUser(String facebookID,String facebookFirstName,Context context){
-
         User user = new User(0, facebookID,facebookFirstName);
         UserManage.getInstance(context).setCurrentUser(user);
         UserManage.getInstance(context).getCurrentUser().setLogin(1);
@@ -129,7 +128,6 @@ public class UserManage {
         if(Login_Activity.instance != null)
             Login_Activity.instance.finish();
 
-        //disable loginFb /w server
         /*
         String url = HttpConnector.URL + "user/loginFacebook"; //url of login API
         final String id = facebookID;
@@ -182,7 +180,6 @@ public class UserManage {
                             context.startActivity(new Intent(context, MainActivity.class));
                             if(Login_Activity.instance != null)
                                 Login_Activity.instance.finish();
-
                         }
                         else {
                             Toast toast = Toast.makeText(context, converter.toString(data.get("description")), Toast.LENGTH_SHORT);

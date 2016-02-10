@@ -8,39 +8,41 @@
     <string name="drawer_close">Close Navigation drawer</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="title_activity_">Activity</string>
-    <string name="title_activity_act_alarm">actAlarm</string>
+    <string name="title_activity_">Move Alarm</string>
+    <string name="title_activity_act_alarm">Move Alarm</string>
     <string name="title_activity_intro_">Move Alarm</string>
-    <string name="title_activity_login_">Login</string>
-    <string name="title_activity_create__account_">Create Account</string>
-    <string name="title_activity_shared">Share Activity</string>
+    <string name="title_activity_login_">Move Alarm</string>
+    <string name="title_activity_create__account_">Move Alarm</string>
+    <string name="title_activity_shared">Move Alarm</string>
     <string name="facebook_app_id">536873643131521</string>
-    <string name="title_activity_pre">Pre Activity</string>
-    <string name="title_activity_posture">Posture</string>
-    <string name="title_activity_scoreboard">Scoreboard</string>
-    <string name="title_activity_create_group">Create Group</string>
-    <string name="title_activity_join_group">Join Group</string>
-    <string name="title_activity_group_main">GroupMainActivity</string>
-    <string name="title_activity_member_group">MemberGroupActivity</string>
-    <string name="title_activity_progress">ProgressActivity</string>
+    <string name="title_activity_pre">Move Alarm</string>
+    <string name="title_activity_posture">Move Alarm</string>
+    <string name="title_activity_scoreboard">Move Alarm</string>
+    <string name="title_activity_create_group">Move Alarm</string>
+    <string name="title_activity_join_group">Move Alarm</string>
+    <string name="title_activity_group_main">Move Alarm</string>
+    <string name="title_activity_member_group">Move Alarm</string>
+    <string name="title_activity_progress">Move Alarm</string>
 
     //card view 1
-    <string name="title">Accept/Cancel</string>
-    <string name="acc">Accept</string>
-    <string name="can">Cancel</string>
-    <string name="totalTime">Time of exercise</string>
-    <string name="mon">Mon</string>
-    <string name="tue">Tue</string>
-    <string name="wed">Wed</string>
-    <string name="thu">Thu</string>
-    <string name="fri">Fri</string>
-    <string name="sat">Sat</string>
-    <string name="sun">Sun</string>
-    <string name="time">Time </string>
-    <string name="cal">Calories </string>
+    <string name="title">ยอมรับ/ปฏิเสธ</string>
+    <string name="acc">ยอมรับ</string>
+    <string name="can">ปฏิเสธ</string>
+    <string name="totalTime">เวลาที่ออกกำลังกาย</string>
+    <string name="mon">จ.</string>
+    <string name="tue">อัง.</string>
+    <string name="wed">พ.</string>
+    <string name="thu">พฤ.</string>
+    <string name="fri">ศ.</string>
+    <string name="sat">ส.</string>
+    <string name="sun">อา.</string>
+    <string name="time">เวลา </string>
+    <string name="cal">แคลอรี่ </string>
 
     //card view 2
-    <string name="title2">Time</string>
+    <string name="title2">เวลา</string>
+
+    <string name="Hello">สวัสดี </string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

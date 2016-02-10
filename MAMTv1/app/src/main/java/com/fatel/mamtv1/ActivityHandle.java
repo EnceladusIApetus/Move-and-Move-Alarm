@@ -58,7 +58,7 @@ public class ActivityHandle {
             ArrayList<Posture> modePosture = postureCollection.getPostureMode(modeSelect[i], context);
             int x;
             do {
-                 x = (int) (Math.random() * modePosture.size());
+                x = (int) (Math.random() * modePosture.size());
 
             }while (i>0&&modePosture.get(x).getIdPosture()==randomPosture.get(i-1).getIdPosture());
             randomPosture.add(modePosture.get(x));

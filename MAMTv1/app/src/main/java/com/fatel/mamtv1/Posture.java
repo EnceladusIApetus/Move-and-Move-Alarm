@@ -84,7 +84,7 @@ public class Posture {
 
     public String getDescription(){
 
-      return this.description;
+        return this.description;
 
     }
     public int getMode(){

@@ -13,7 +13,7 @@ android:layout_height="match_parent">
     android:textStyle="bold"
     android:layout_gravity="center"
 
-    android:text="Group Member"/>
+    android:text="สมาชิกกลุ่ม"/>
 
 
 
@@ -43,7 +43,7 @@ android:layout_height="match_parent">
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:gravity="center"
-            android:text="No."/>
+            android:text="ลำดับ"/>
 
 
         <LinearLayout
