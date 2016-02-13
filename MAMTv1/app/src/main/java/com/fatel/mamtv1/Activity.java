@@ -59,7 +59,7 @@ public class Activity extends AppCompatActivity {
         txtA=(TextView) findViewById(R.id.atime);
         txtDes=(TextView) findViewById(R.id.des);
         imgView=(ImageView) findViewById(R.id.img);
-        ActivityHandle activityHandle=new ActivityHandle();
+        ActivityHandle activityHandle=new ActivityHandle(this);
         context=getApplicationContext();
         img = activityHandle.getRandomPosture(this);
 
@@ -132,6 +132,7 @@ public class Activity extends AppCompatActivity {
 
     public void linkHome(View view)
     {
+        frameAnimation.stop();
         if(time1!=null){
             time1.cancel();
             time1=null;

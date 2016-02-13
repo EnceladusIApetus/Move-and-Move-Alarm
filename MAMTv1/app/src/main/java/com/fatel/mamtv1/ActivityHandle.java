@@ -9,46 +9,39 @@ import java.util.ArrayList;
  */
 public class ActivityHandle {
 
-    int[] imageId = new int[] {-1,-1,-1,-1};
     int[] modeSelect = new int[] {-1,-1};
+    int modeCount=0;
 
-    public ActivityHandle(){
+
+    public ActivityHandle(Context context){
         //use selected mode from alarm
-        modeRandom(new int[]{1, 2, 3, 4, 5, 6});
+
+        modeRandom(getMode(context));
 
     }
-    public int[] getImageId(){
-        return imageId;
-
-    }
-    public void modeRandom(int[] mode){
+    private void modeRandom(int[] mode){
 
         int x;
         int i=0;
         while (i<2){
-            x=(int)(Math.random() * (mode.length));
+            x=(int)(Math.random() * (modeCount));
             modeSelect[i]=mode[x];
             i++;
         }
 
     }
-
-    public void random(){
-        for(int i=0;i<4;i++){
-            boolean same=true;
-            int x=0;
-            while(same){
-                same=false;
-                x=(int)(Math.random() * 13);
-                for(int j=0;j<i;j++) {
-                    if (x == imageId[j]){
-                        same=true;
-                        break;
-                    }
-                }
+    private int[] getMode(Context context){
+        DBAlarmHelper mAlarmHelper= new DBAlarmHelper(context);
+        Alarm alarm = mAlarmHelper.getAlarm();
+        int modeDB[] = {0,0,0,0,0,0};
+        for(int i=0;i<6;i++)
+        {
+            if(Integer.parseInt(alarm.getMode().substring(i,i+1))==1){
+                modeDB[modeCount]=i+1;
+                modeCount++;
             }
-            imageId[i]=x;
         }
+        return modeDB;
 
     }
     public ArrayList<Posture> getRandomPosture(Context context){
