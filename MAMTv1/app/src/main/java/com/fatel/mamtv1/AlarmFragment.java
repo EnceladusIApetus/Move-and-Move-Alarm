@@ -3,6 +3,7 @@ package com.fatel.mamtv1;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.TextView;
+import android.content.Intent;
 
 
 /**
@@ -35,8 +37,17 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
     private CheckBox mChkboxFri;
     private CheckBox mChkboxSat;
     private CheckBox mChkboxSun;
+    private CheckBox mChkboxM1;
+    private CheckBox mChkboxM2;
+    private CheckBox mChkboxM3;
+    private CheckBox mChkboxM4;
+    private CheckBox mChkboxM5;
+    private CheckBox mChkboxM6;
     private String mdays="";
+    private String mModes="";
     private Spinner mFreq;
+    private Button buttonSet;
+    Context context;
 
 
     private DBAlarmHelper mAlarmHelper;
@@ -59,9 +70,9 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
 
         mStartHr = createSpinner(12, R.id.start_hr,true,view,mAlarmHelper,true);
         mStartMin = createSpinner(60, R.id.start_min,false,view,mAlarmHelper,true);
-        mFinishHr = createSpinner(12, R.id.fin_hr, true, view,mAlarmHelper,false);
+        mFinishHr = createSpinner(12, R.id.fin_hr, true, view, mAlarmHelper, false);
         mFinishMin = createSpinner(60, R.id.fin_min, false, view, mAlarmHelper, false);
-        mStartAP = createSpinnerAmPm(R.id.start_AP, view,mAlarmHelper,true);
+        mStartAP = createSpinnerAmPm(R.id.start_AP, view, mAlarmHelper, true);
         mFinishAP = createSpinnerAmPm(R.id.fin_AP, view,mAlarmHelper,false);
         mChkboxSun = (CheckBox)view.findViewById(R.id.chkboxSun);
         mChkboxMon = (CheckBox)view.findViewById(R.id.chkboxMon);
@@ -70,12 +81,20 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
         mChkboxThu = (CheckBox)view.findViewById(R.id.chkboxThu);
         mChkboxFri = (CheckBox)view.findViewById(R.id.chkboxFri);
         mChkboxSat = (CheckBox)view.findViewById(R.id.chkboxSat);
+        mChkboxM1 = (CheckBox)view.findViewById(R.id.chkboxM1);
+        mChkboxM2 = (CheckBox)view.findViewById(R.id.chkboxM2);
+        mChkboxM3 = (CheckBox)view.findViewById(R.id.chkboxM3);
+        mChkboxM4 = (CheckBox)view.findViewById(R.id.chkboxM4);
+        mChkboxM5 = (CheckBox)view.findViewById(R.id.chkboxM5);
+        mChkboxM6 = (CheckBox)view.findViewById(R.id.chkboxM6);
+        buttonSet = (Button)view.findViewById(R.id.buttonSet);
         mFreq = createSpinnerFrq(R.id.frq_min, view,mAlarmHelper);
 
         //check checkbox tick
         if(mAlarmHelper.checkdata()==1) {
             Alarm alarm = mAlarmHelper.getAlarm();
             String day = alarm.getDay();
+            String mode = alarm.getMode();
             if(day.substring(0,1).equals("1"))
                 mChkboxSun.setChecked(true);
             if(day.substring(1,2).equals("1"))
@@ -90,57 +109,101 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
                 mChkboxFri.setChecked(true);
             if(day.substring(6,7).equals("1"))
                 mChkboxSat.setChecked(true);
-        }
 
+            if(mode.substring(0,1).equals("1"))
+                mChkboxM1.setChecked(true);
+            if(mode.substring(1,2).equals("1"))
+                mChkboxM2.setChecked(true);
+            if(mode.substring(2,3).equals("1"))
+                mChkboxM3.setChecked(true);
+            if(mode.substring(3,4).equals("1"))
+                mChkboxM4.setChecked(true);
+            if(mode.substring(4,5).equals("1"))
+                mChkboxM5.setChecked(true);
+            if(mode.substring(5,6).equals("1"))
+                mChkboxM6.setChecked(true);
+        }
+        View rootView = inflater.inflate(R.layout.fragment_alarm, container, false);
+        context = rootView.getContext();
         Button bt = (Button) view.findViewById(R.id.buttonSet);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(mChkboxSun.isChecked()){
+                if (mChkboxSun.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
-                if(mChkboxMon.isChecked()){
+                if (mChkboxMon.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
-                if(mChkboxTue.isChecked()){
+                if (mChkboxTue.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
-                if(mChkboxWed.isChecked()){
+                if (mChkboxWed.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
-                if(mChkboxThu.isChecked()){
+                if (mChkboxThu.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
-                if(mChkboxFri.isChecked()){
+                if (mChkboxFri.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
-                if(mChkboxSat.isChecked()){
+                if (mChkboxSat.isChecked()) {
                     mdays += "1";
-                }
-                else{
+                } else {
                     mdays += "0";
                 }
 
+                if (mChkboxM1.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM2.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM3.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM4.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM5.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+                if (mChkboxM6.isChecked()) {
+                    mModes += "1";
+                } else {
+                    mModes += "0";
+                }
+
                 //keep data
+
+                if (Integer.parseInt(mModes) == 0) {
+                    Toast.makeText(getActivity(), "กรุณาเลือกหมวดท่าบริหาร", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
                     Alarm alarm = new Alarm();
                     alarm.setId(1);
                     alarm.setStarthr(mStartHr.getSelectedItem().toString());
@@ -151,22 +214,31 @@ public class AlarmFragment extends android.support.v4.app.Fragment {
                     alarm.setStopinterval(mFinishAP.getSelectedItem().toString());
                     alarm.setDay(mdays.toString());
                     alarm.setFrq(mFreq.getSelectedItem().toString());
-                    if (ID == -1 && (mAlarmHelper.checkdata()==0)) {
+                    alarm.setMode(mModes.toString());
+                    if (ID == -1 && (mAlarmHelper.checkdata() == 0)) {
                         mAlarmHelper.addAlarm(alarm);
                     } else {
                         mAlarmHelper.UpdateAlarm(alarm);
                     }
                     mdays = "";
-                Intent mServiceIntent = new Intent(getActivity(), AlarmReceiver.class);
-                pendingIntent = PendingIntent.getBroadcast(getActivity(),0,mServiceIntent,0);
-                start();
+                    Intent mServiceIntent = new Intent(getActivity(), AlarmReceiver.class);
+                    pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, mServiceIntent, 0);
+                    start();
 
-                Toast.makeText(getActivity(), "SetAlarm Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "ตั้งค่าสำเร็จ", Toast.LENGTH_SHORT).show();
 
+                    Intent intent = new Intent(context, MainActivity.class);
+                    startActivity(intent);
+
+                   }
+
+
+                }
             }
-        });
-        return view;
-    }
+
+            );
+            return view;
+        }
 
     public Spinner createSpinner(int num,int id,boolean isHr,View view,DBAlarmHelper mAlarmHelper,boolean isStart)
     {

@@ -2,6 +2,8 @@ package com.fatel.mamtv1;
 import android.content.Context;
 import android.provider.BaseColumns;
 
+import java.util.ArrayList;
+
 /**
  * Created by Administrator on 23/10/2558.
  */
@@ -11,6 +13,7 @@ public class Posture {
     private int idPosture;
     private int image;
     private String description;
+    private int mode;
 
     private PostureHelper helper;
 
@@ -20,19 +23,22 @@ public class Posture {
         public static final String IDPOSTURE = "idPosture";
         public static final String IMAGE= "image";
         public static final String DESCRIPTION = "description";
+        public static final String MODE = "mode";
     }
 
-    public Posture(int id,int idPosture, int image, String description){
+    public Posture(int id,int idPosture, int image, String description,int mode){
         this.id=id;
         this.idPosture = idPosture;
         this.image=image;
         this.description=description;
+        this.mode = mode;
     }
-    public Posture(int idPosture,int image,String description){
+    public Posture(int idPosture,int image,String description,int mode){
         this.id=-1;
         this.idPosture = idPosture;
         this.image=image;
         this.description=description;
+        this.mode=mode;
     }
     public void save (Context context){
         PostureHelper postureHelper = new PostureHelper(context);
@@ -50,6 +56,14 @@ public class Posture {
         }
         else
             return postureHelper.getPosture(idPosture);
+    }
+    public static ArrayList<Posture> findMode(int mode,Context context){
+        PostureHelper postureHelper = new PostureHelper(context);
+        if (postureHelper.getPostureMode(mode)==null){
+            return null;
+        }
+        else
+            return postureHelper.getPostureMode(mode);
     }
     public static int getPostureCount(Context context){
         PostureHelper postureHelper = new PostureHelper(context);
@@ -70,8 +84,11 @@ public class Posture {
 
     public String getDescription(){
 
-      return this.description;
+        return this.description;
 
+    }
+    public int getMode(){
+        return this.mode;
     }
 
     public void setId(int id) {
@@ -88,4 +105,5 @@ public class Posture {
     public void setDescription(String description) {
         this.description = description;
     }
+    public void setMode(int mode){ this.mode = mode; }
 }
