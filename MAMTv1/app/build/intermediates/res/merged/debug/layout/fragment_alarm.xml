@@ -254,4 +254,4 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
     android:textAllCaps="false"
     android:id="@+id/buttonSet"
     />
-</RelativeLayout><!-- From: file:/C:/Users/kid14/Documents/GitHub/MoveV2/Move-and-Move-Alarm/MAMTv1/app/src/main/res/layout/fragment_alarm.xml -->
+</RelativeLayout><!-- From: file:/E:/MA/Move-and-Move-Alarm/MAMTv1/app/src/main/res/layout/fragment_alarm.xml -->

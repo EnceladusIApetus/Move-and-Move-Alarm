@@ -22,4 +22,4 @@
         app:menu="@menu/drawer_view"
         app:itemTextColor="@android:color/white"
          />
-</android.support.v4.widget.DrawerLayout><!-- From: file:/C:/Users/kid14/Documents/GitHub/MoveV2/Move-and-Move-Alarm/MAMTv1/app/src/main/res/layout/activity_main.xml -->
+</android.support.v4.widget.DrawerLayout><!-- From: file:/E:/MA/Move-and-Move-Alarm/MAMTv1/app/src/main/res/layout/activity_main.xml -->
