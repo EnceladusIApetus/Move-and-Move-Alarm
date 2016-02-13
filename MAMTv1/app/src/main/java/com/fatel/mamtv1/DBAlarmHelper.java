@@ -19,7 +19,7 @@ public class DBAlarmHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db){
         String CREATE_ALRAM_TABLE = String.format("CREATE TABLE %s " +
                         "(%s INTEGER, %s TEXT, %s TEXT, %s TEXT, %s TEXT, " +
-                        "%s TEXT,%s TEXT,%s TEXT,%s TEXT,%s TEXT)", //PRIMARY KEY  AUTOINCREMENT
+                        "%s TEXT,%s TEXT,%s TEXT,%s TEXT)", //PRIMARY KEY  AUTOINCREMENT
                 Alarm.TABLE,
                 Alarm.Column.ID,
                 Alarm.Column.START_HR,
@@ -29,8 +29,7 @@ public class DBAlarmHelper extends SQLiteOpenHelper{
                 Alarm.Column.START_INTERVAL,
                 Alarm.Column.STOP_INTERVAL,
                 Alarm.Column.FRQ,
-                Alarm.Column.DAY,
-                Alarm.Column.MODE);
+                Alarm.Column.DAY);
         db.execSQL(CREATE_ALRAM_TABLE);
     }
     @Override
@@ -51,7 +50,6 @@ public class DBAlarmHelper extends SQLiteOpenHelper{
         values.put(Alarm.Column.STOP_INTERVAL,alarm.getStopinterval());
         values.put(Alarm.Column.FRQ, alarm.getFrq());
         values.put(Alarm.Column.DAY, alarm.getDay());
-        values.put(Alarm.Column.MODE, alarm.getMode());
         sqLiteDatabase.insert(Alarm.TABLE, null, values);
         sqLiteDatabase.close();
     }
@@ -66,7 +64,6 @@ public class DBAlarmHelper extends SQLiteOpenHelper{
         values.put(Alarm.Column.STOP_INTERVAL,alarm.getStopinterval());
         values.put(Alarm.Column.FRQ, alarm.getFrq());
         values.put(Alarm.Column.DAY, alarm.getDay());
-        values.put(Alarm.Column.MODE, alarm.getMode());
         int row = sqLiteDatabase.update(alarm.TABLE,
                 values,
                 Alarm.Column.ID + " = ? ",
@@ -91,13 +88,13 @@ public class DBAlarmHelper extends SQLiteOpenHelper{
                         Alarm.Column.START_HR, Alarm.Column.START_MIN,
                         Alarm.Column.STOP_HR, Alarm.Column.STOP_MIN, Alarm.Column.START_INTERVAL,
                         Alarm.Column.STOP_INTERVAL, Alarm.Column.FRQ,
-                        Alarm.Column.DAY,Alarm.Column.MODE
+                        Alarm.Column.DAY
                 }, Alarm.Column.ID + " = ? ",
                 new String[]{String.valueOf(1)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
         Alarm alarm = new Alarm(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),
-                cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9));
+                cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8));
         cursor.close();
         db.close();
         return alarm;

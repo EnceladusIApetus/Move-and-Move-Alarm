@@ -45,12 +45,6 @@ public class Login_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         instance = this;
         super.onCreate(savedInstanceState);
-        if(UserManage.getInstance(this).checkCurrentLogin(this))
-        {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.fatel.mamtv1",
@@ -168,7 +162,7 @@ public class Login_Activity extends AppCompatActivity {
             UserManage.getInstance(this).setFacebookLastName(profile.getLastName(), this);
 
             Intent intent = new Intent(Login_Activity.this, MainActivity.class);
-            Toast.makeText(this, getString(R.string.Hello)+profile.getFirstName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "สวัสดี "+profile.getFirstName(), Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
     }

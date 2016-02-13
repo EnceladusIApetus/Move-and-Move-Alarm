@@ -35,7 +35,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     Intent i = new Intent(context, ActAlarm.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(i);
-                    Toast.makeText(context, "เริ่มการบริหาร", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
             }
             else if(inRange(timenow())) {
                 setfrq(context,temp);
@@ -135,7 +135,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             Intent i = new Intent(context, ActAlarm.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
-            Toast.makeText(context, "เริ่มการบริหาร", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
         }
         else{
             Intent alarmIntent = new Intent(context , AlarmReceiver.class);

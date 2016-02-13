@@ -54,7 +54,7 @@ public class EventActivity extends AppCompatActivity {
         txtA=(TextView) findViewById(R.id.atime);
         txtDes=(TextView) findViewById(R.id.des);
         imgView=(ImageView) findViewById(R.id.img);
-        ActivityHandle activityHandle=new ActivityHandle(this);
+        ActivityHandle activityHandle=new ActivityHandle();
         context=getApplicationContext();
         img = activityHandle.getRandomPosture(this);
         exerciseImg=(img.get(count)).getImage();

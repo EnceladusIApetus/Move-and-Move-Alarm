@@ -9,54 +9,43 @@ import java.util.ArrayList;
  */
 public class ActivityHandle {
 
-    int[] modeSelect = new int[] {-1,-1};
-    int modeCount=0;
+    int[] imageId = new int[] {-1,-1,-1,-1};
 
+    public ActivityHandle(){
 
-    public ActivityHandle(Context context){
-        //use selected mode from alarm
-
-        modeRandom(getMode(context));
+        random();
 
     }
-    private void modeRandom(int[] mode){
-
-        int x;
-        int i=0;
-        while (i<2){
-            x=(int)(Math.random() * (modeCount));
-            modeSelect[i]=mode[x];
-            i++;
-        }
+    public int[] getImageId(){
+        return imageId;
 
     }
-    private int[] getMode(Context context){
-        DBAlarmHelper mAlarmHelper= new DBAlarmHelper(context);
-        Alarm alarm = mAlarmHelper.getAlarm();
-        int modeDB[] = {0,0,0,0,0,0};
-        for(int i=0;i<6;i++)
-        {
-            if(Integer.parseInt(alarm.getMode().substring(i,i+1))==1){
-                modeDB[modeCount]=i+1;
-                modeCount++;
+    public int getImageIdByIndex(int index){
+        return imageId[index];
+
+    }
+
+    public void random(){
+        for(int i=0;i<4;i++){
+            boolean same=true;
+            int x=0;
+            while(same){
+                same=false;
+                x=(int)(Math.random() * 13);
+                for(int j=0;j<i;j++) {
+                    if (x == imageId[j]){
+                        same=true;
+                        break;
+                    }
+                }
             }
+            imageId[i]=x;
         }
-        return modeDB;
 
     }
     public ArrayList<Posture> getRandomPosture(Context context){
         PostureCollection postureCollection= PostureCollection.getInstance(context);
-        ArrayList<Posture> randomPosture = new ArrayList<>();
-        for(int i=0;i<2;i++){
-            ArrayList<Posture> modePosture = postureCollection.getPostureMode(modeSelect[i], context);
-            int x;
-            do {
-                x = (int) (Math.random() * modePosture.size());
-
-            }while (i>0&&modePosture.get(x).getIdPosture()==randomPosture.get(i-1).getIdPosture());
-            randomPosture.add(modePosture.get(x));
-        }
-
+        ArrayList<Posture> randomPosture = postureCollection.getPosture(getImageId());
         return  randomPosture;
     }
 
