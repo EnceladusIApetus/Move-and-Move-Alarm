@@ -55,6 +55,7 @@ public class User {
         this.facebookID="0";
         this.idUser = idUser;
         this.userName = username;
+        this.idGroup=0;
         this.statesw =1;
     }
     public User(int idUser,String facebookID,String facebookFirstName){
@@ -64,6 +65,7 @@ public class User {
         this.idUser = idUser;
         this.facebookID = facebookID;
         this.facebookFirstName = facebookFirstName;
+        this.idGroup=0;
         this.statesw =1;
     }
     public User(int id,int idUser,String firstName, String lastName, String username,int age,int score

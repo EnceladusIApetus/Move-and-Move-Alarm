@@ -117,17 +117,6 @@ public class UserManage {
 
     }
     public void loginFBUser(String facebookID,String facebookFirstName,Context context){
-        User user = new User(0, facebookID,facebookFirstName);
-        UserManage.getInstance(context).setCurrentUser(user);
-        UserManage.getInstance(context).getCurrentUser().setLogin(1);
-        UserManage.getInstance(context).getCurrentUser().save(context);
-
-        Toast toast = Toast.makeText(context, "Hello "+facebookFirstName, Toast.LENGTH_SHORT);
-        toast.show();
-        context.startActivity(new Intent(context, MainActivity.class));
-        if(Login_Activity.instance != null)
-            Login_Activity.instance.finish();
-
 
         String url = HttpConnector.URL + "user/loginFacebook"; //url of login API
         final String id = facebookID;
@@ -175,7 +164,7 @@ public class UserManage {
                             UserManage.getInstance(context).getCurrentUser().setLogin(1);
                             UserManage.getInstance(context).getCurrentUser().save(context);
 
-                            Toast toast = Toast.makeText(context, "Hello "+facebookFirstName, Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(context, "สวัสดี "+facebookFirstName, Toast.LENGTH_SHORT);
                             toast.show();
                             context.startActivity(new Intent(context, MainActivity.class));
                             if(Login_Activity.instance != null)

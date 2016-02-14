@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mAlarmHelper.deleteSetAlarm("1");
                 mDrawerLayout.closeDrawers();
-                Intent intent = new Intent(this, Intro_Activity.class);
+                Intent intent = new Intent(this, Login_Activity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
                         mAlarmHelper =  new DBAlarmHelper(MainActivity.this);
                         mAlarmHelper.deleteSetAlarm("1");
                         mDrawerLayout.closeDrawers();
-                        makeToast("Delete set time");
+                        makeToast("รีเซตการตั้งค่าการแจ้งเตือน");
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -335,9 +335,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
-        builder.setTitle("Alarm");
-        builder.setMessage("Do you want to reset alarm?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setTitle("รีเซตการตั้งค่าการแจ้งเตือนน");
+        builder.setMessage("ยืนยันการรีเซต?").setPositiveButton("ตกลง", dialogClickListener)
+                .setNegativeButton("ยกเลิก", dialogClickListener).show();
     }
 
     public void makeToast(String text)
@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
     public void requestGroupInfo(Class nextActivity)
     {
         final Class nxtActivity = nextActivity;
-        String url = "http://203.151.92.196:8080/group/findByID";
+        String url = "http://161.246.70.77:8080/group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override
@@ -388,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void requestGroupInfo()
     {
-        String url = "http://203.151.92.196:8080/group/findByID";
+        String url = "http://161.246.70.77:8080/group/findByID";
         StringRequest findGroupRequest = new StringRequest(Request.Method.POST, url, //create new string request with POST method
                 new Response.Listener<String>() { //create new listener to traces the data
                     @Override

@@ -25,9 +25,9 @@
     <string name="title_activity_progress">Move Alarm</string>
 
     //card view 1
-    <string name="title">ยอมรับ/ปฏิเสธ</string>
-    <string name="acc">ยอมรับ</string>
-    <string name="can">ปฏิเสธ</string>
+    <string name="title">การรับการออกกำลังกาย</string>
+    <string name="acc">ตกลง</string>
+    <string name="can">ยกเลิก</string>
     <string name="totalTime">เวลาที่ออกกำลังกาย</string>
     <string name="mon">จ.</string>
     <string name="tue">อัง.</string>
