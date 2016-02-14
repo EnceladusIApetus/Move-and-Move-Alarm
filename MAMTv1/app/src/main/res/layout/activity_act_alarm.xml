@@ -24,7 +24,7 @@
                 android:id="@+id/apt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "ยอมรับ"
+                android:text = "ตกลง"
                 android:textSize="21dp"
                 android:textColor="#FF7112"
 
@@ -52,6 +52,20 @@
                 android:onClick="linkHome"/>
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ถึงเวลาออกกำลัง!"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:layout_marginTop="60dp"
+        android:textColor="#FF7112"
+        android:gravity="center"
+        android:textIsSelectable="true" />
 
 
 </RelativeLayout>
