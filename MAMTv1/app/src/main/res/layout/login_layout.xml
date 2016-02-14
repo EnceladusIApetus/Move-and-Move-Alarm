@@ -18,7 +18,8 @@
         facebook:com_facebook_tooltip_mode="never_display"
         android:layout_marginBottom="146dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false" />
 
 
 </RelativeLayout>

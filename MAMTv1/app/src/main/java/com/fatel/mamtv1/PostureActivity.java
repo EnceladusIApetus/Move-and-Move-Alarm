@@ -15,17 +15,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class PostureActivity extends AppCompatActivity {
-    int count=0;
+    int mode=1;
+    int imgId=0;
     TextView txtDes;
     ImageView imgView;
     AnimationDrawable frameAnimation;
     Button previous;
     Button home;
     Button next;
-    ArrayList<Posture> img ;
+    View pre;
     int exerciseImg;
     String exerciseDes;
-    private static final String FORMAT = "%02d:%02d";
+    ArrayList<Posture> postureMode;
     public static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,76 +34,78 @@ public class PostureActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null)
         {
-            count = bundle.getInt("value");
+            mode = bundle.getInt("value");
         }
         setContentView(R.layout.activity_posture);
-        img = new ArrayList<>();
         txtDes=(TextView) findViewById(R.id.txt);
         imgView=(ImageView) findViewById(R.id.img);
         home = (Button) findViewById(R.id.homebtn);
         next = (Button) findViewById(R.id.nextbtn);
         previous = (Button) findViewById(R.id.previousbtn);
         context=getApplicationContext();
-        PostureCollection postureCollection = PostureCollection.getInstance(this);
-        int[] imageId = new int[] {0,1,2,3,4,5,6,7,8,9,10,11,12};
-        img = postureCollection.getPosture(imageId);
-        exerciseImg=(img.get(count)).getImage();
-        exerciseDes=(img.get(count)).getDescription();
+
+        final PostureCollection postureCollection = PostureCollection.getInstance(this);
+        postureMode = postureCollection.getPostureMode(mode, context);
+        exerciseImg = (postureMode.get(imgId)).getImage();
+        exerciseDes = (postureMode.get(imgId)).getDescription();
         txtDes.setText(exerciseDes);
         imgView.setBackgroundResource(exerciseImg);
         // Get the background, which has been compiled to an AnimationDrawable object.
         frameAnimation = (AnimationDrawable) imgView.getBackground();
         // Start the animation (looped playback by default).
         frameAnimation.start();
+        checkVisible();
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                next.setEnabled(true);
-                count--;
-                if (count >= 0) {
+
+
+                if (imgId >= 0) {
                     frameAnimation.stop();
-                    exerciseImg = (img.get(count)).getImage();
-                    exerciseDes = (img.get(count)).getDescription();
+                    if(imgId>0)
+                        imgId--;
+                    checkVisible();
+                    exerciseImg = (postureMode.get(imgId)).getImage();
+                    exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
                     imgView.setBackgroundResource(exerciseImg);
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
                     // Start the animation (looped playback by default).
                     frameAnimation.start();
-                } else if (count == -1) {
-                    count = 0;
-                    previous.setEnabled(false);
+
                 }
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                previous.setEnabled(true);
-                count++;
-                if (count < 13) {
+
+
+                if (imgId < postureMode.size()) {
                     frameAnimation.stop();
-                    exerciseImg = (img.get(count)).getImage();
-                    exerciseDes = (img.get(count)).getDescription();
+                    if(imgId < postureMode.size()-1)
+                        imgId++;
+                    checkVisible();
+                    exerciseImg = (postureMode.get(imgId)).getImage();
+                    exerciseDes = (postureMode.get(imgId)).getDescription();
                     txtDes.setText(exerciseDes);
                     imgView.setBackgroundResource(exerciseImg);
                     // Get the background, which has been compiled to an AnimationDrawable object.
                     frameAnimation = (AnimationDrawable) imgView.getBackground();
                     // Start the animation (looped playback by default).
                     frameAnimation.start();
-                }
-                else if(count == 13)
-                {
-                    count = 12;
-                    next.setEnabled(false);
+
+
                 }
             }
         });
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                frameAnimation.stop();
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -129,5 +132,19 @@ public class PostureActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void checkVisible(){
+        if (imgId == 0) {
+            previous.setVisibility(View.INVISIBLE);
+        }
+        else {
+            previous.setVisibility(View.VISIBLE);
+        }
+        if(imgId == postureMode.size()-1) {
+            next.setVisibility(View.INVISIBLE);
+        }
+        else{
+            next.setVisibility(View.VISIBLE);
+        }
     }
 }

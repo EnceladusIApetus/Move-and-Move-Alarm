@@ -174,7 +174,7 @@ public class Activity extends AppCompatActivity {
 
                         HashMap<String, Object> data = converter.JSONToHashMap(response);
                         if((boolean) data.get("status")) {
-                            makeToast("Done activity! Get 1 point.");
+                            makeToast("ทำกิจกรรมสำเร็จ รับ 1 คะแนน!");
                             UserManage.getInstance(Activity.this).addScore(1, Activity.this);
                         }
                         else {

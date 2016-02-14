@@ -301,7 +301,7 @@ tools:context="com.fatel.mamtv1.AlarmFragment">
         </LinearLayout>
     </LinearLayout>
 <Button
-    android:text="Set"
+    android:text="บันทึก"
     android:gravity="center"
     android:textColor="#FFF5F5"
     android:textSize="20sp"
