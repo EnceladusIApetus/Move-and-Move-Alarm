@@ -24,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class ProfileFragment extends android.support.v4.app.Fragment {
     CircleImageView propic;
-    TextView user;
+    TextView fb;
     TextView firstname;
     TextView lastname;
     Button editname;
@@ -39,7 +39,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         propic = (CircleImageView)view.findViewById(R.id.profile_image_p);
-        user = (TextView)view.findViewById(R.id.edituser);
+        fb = (TextView)view.findViewById(R.id.editFB);
         firstname = (TextView)view.findViewById(R.id.editproname);
         lastname = (TextView)view.findViewById(R.id.editsurproname);
         editname = (Button)view.findViewById(R.id.edit);
@@ -52,12 +52,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             }
         }
 
-        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername()+"").equals("null"))
-            user.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentUsername());
+        if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName()+"").equals("null"))
+            fb.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
         if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName()+"").equals("null"))
             firstname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFirstName());
-        else if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName()+"").equals("null"))
-            firstname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentFacebookFirstName());
         if(!(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName()+"").equals("null"))
             lastname.setText(UserManage.getInstance((Context) Cache.getInstance().getData("MainActivityContext")).getCurrentLastName());
 

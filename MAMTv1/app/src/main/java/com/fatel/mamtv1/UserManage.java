@@ -128,7 +128,7 @@ public class UserManage {
         if(Login_Activity.instance != null)
             Login_Activity.instance.finish();
 
-        /*
+
         String url = HttpConnector.URL + "user/loginFacebook"; //url of login API
         final String id = facebookID;
         final String name = facebookFirstName;
@@ -209,7 +209,7 @@ public class UserManage {
         };
 
         HttpConnector.getInstance(context).addToRequestQueue(loginFBRequest); //add the request to HTTPConnector, the class will respond the request automatically at separated thread
-*/
+
     }
     public void logoutUser(Context context){
         currentUser.setLogin(0);

@@ -568,15 +568,15 @@ public class MainActivity extends AppCompatActivity {
         surname.setTextColor(Color.WHITE);
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-        name.setHint(Html.fromHtml("<font color='#B0B0B0'>Name</font>"));
+        name.setHint(Html.fromHtml("<font color='#B0B0B0'>ชื่อ</font>"));
         layout.addView(name);
-        surname.setHint(Html.fromHtml("<font color='#B0B0B0'>Surname</font>"));
+        surname.setHint(Html.fromHtml("<font color='#B0B0B0'>สกุล</font>"));
         layout.addView(surname);
         AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK);
-        builder.setTitle("Edit");
+        builder.setTitle("แก้ไขข้อมูล");
         builder.setView(layout);
-        builder.setMessage("Edit information").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage("แก้ไข ชื่อ-นามสุกล").setPositiveButton("ตกลง", dialogClickListener)
+                .setNegativeButton("ยกเลิก", dialogClickListener).show();
 
     }
     private boolean isEmpty(EditText myeditText) {

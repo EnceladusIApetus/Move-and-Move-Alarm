@@ -15,7 +15,7 @@ public class HttpConnector {
     private RequestQueue requestQueue;
     private static Context context;
     private Map<String, Object> cache;
-    public static String URL = "http://203.151.92.196:8080/";
+    public static String URL = "http://161.246.70.77:8080/";
 
     private HttpConnector(Context context) {
         this.context = context;
